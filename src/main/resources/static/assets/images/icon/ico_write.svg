@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ic-16-write" transform="translate(-3 -16)">
+    <rect id="base" width="16" height="16" transform="translate(3 16)" fill="none"/>
+    <g id="icon" transform="translate(-12.877 -9.7)">
+      <path id="path" d="M11.06,3.193l3.75,3.75L7.75,14H4v-3.75Zm4.82,2.68-3.75-3.75L13.96.292a1,1,0,0,1,1.41,0l2.34,2.34a1,1,0,0,1,0,1.41Z" transform="translate(12.877 26.698)" fill="#1f1f1f"/>
+    </g>
+  </g>
+</svg>

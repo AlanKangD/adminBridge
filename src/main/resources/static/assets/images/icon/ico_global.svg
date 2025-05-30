@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_global" transform="translate(-172 -252)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(196 276) rotate(180)" fill="none" opacity="0"/>
+    <path id="path" d="M20,10A10,10,0,1,1,10,0,10,10,0,0,1,20,10Z" transform="translate(174 254)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M.463,0h1a28.424,28.424,0,0,0,0,18h-1" transform="translate(179.537 255)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-3" data-name="path" d="M0,0A28.424,28.424,0,0,1,0,18" transform="translate(187 255)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-4" data-name="path" d="M0,1V0A28.424,28.424,0,0,0,18,0V1" transform="translate(175 267)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-5" data-name="path" d="M0,1.463a28.424,28.424,0,0,1,18,0" transform="translate(175 259.538)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

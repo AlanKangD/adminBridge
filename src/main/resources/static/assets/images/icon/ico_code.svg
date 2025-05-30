@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ic-16-arrow-sort" transform="translate(32 -152) rotate(90)">
+    <rect id="base" width="16" height="16" transform="translate(152 16)" fill="none"/>
+    <g id="icon" transform="translate(155 18)">
+      <path id="path" d="M1,3.693,4.707,0,8.413,3.693" transform="translate(0 -1)" fill="none" stroke="#575d6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="path-2" data-name="path" d="M1,1,4.707,4.693,8.413,1" transform="translate(0 8)" fill="none" stroke="#575d6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

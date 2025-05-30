@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_overflow_menu" transform="translate(-236 -252)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(236 252)" fill="none" opacity="0"/>
+    <circle id="oval" cx="1.5" cy="1.5" r="1.5" transform="translate(247 269)" fill="#525252"/>
+    <circle id="oval-2" data-name="oval" cx="1.5" cy="1.5" r="1.5" transform="translate(247 263)" fill="#525252"/>
+    <circle id="oval-3" data-name="oval" cx="1.5" cy="1.5" r="1.5" transform="translate(247 257)" fill="#525252"/>
+  </g>
+</svg>

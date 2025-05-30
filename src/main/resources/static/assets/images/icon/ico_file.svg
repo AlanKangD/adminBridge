@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_file" transform="translate(-428 -188)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(452 212) rotate(180)" fill="none" opacity="0"/>
+    <path id="path" d="M557.556,120.607l-6.01,6.01a4.5,4.5,0,0,1-6.364,0h0a4.5,4.5,0,0,1,0-6.364l8.132-8.132a3,3,0,0,1,4.242,0h0a3,3,0,0,1,0,4.243l-8.131,8.132a1.5,1.5,0,0,1-2.122,0h0a1.5,1.5,0,0,1,0-2.122l6.011-6.01" transform="translate(-111 80.032)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

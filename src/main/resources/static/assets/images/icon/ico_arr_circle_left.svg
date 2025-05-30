@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_left_circle" transform="translate(-108 -380)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(132 404) rotate(180)" fill="none" opacity="0"/>
+    <path id="path" d="M20,10A10,10,0,1,1,10,0,10,10,0,0,1,20,10Z" transform="translate(110 382)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M6,0H0" transform="translate(117.5 392)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-3" data-name="path" d="M3,0,0,3,3,6" transform="translate(116.5 389)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav th:fragment="navigation" class="menu_lst" style="z-index:1;">
+        <h1>
+            <a th:href="@{/}">ALAN 레시피</a>
+        </h1>
+        <dl>
+            <dt class="depth1">레시피 관리</dt>
+            <dd class="depth2">
+                <ul class="depth2_lst">
+                    <li>
+                        <a th:href="@{/}">
+                            <i class="ico_24 reci_modi"></i>
+                            <span>레시피 목록</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/recipe/recipeBoardWrite}">
+                            <i class="ico_24 reci_upload"></i>
+                            <span>레시피 등록</span>
+                        </a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+        <div class="menubar_toggle_wrap">
+            <button class="menubar_toggle">
+                <img th:src="@{/assets/images/ico_lnb_small.svg}" alt="접기/펴기">
+            </button>
+        </div>
+        <footer>
+            © ChefAlan.&nbsp;<span class="uppercase">All Right Reserved</span>
+        </footer>
+        <script th:inline="javascript">
+            $(function(){
+                $('.menu_lst h1 a').click(function(){
+                    $('.depth2_lst li').siblings().removeClass('active');
+                    sessionStorage.setItem('currentPage', $(this).attr('href'));
+                });
+
+                $('.depth2_lst li').click(function(){
+                    $('.depth2_lst li').siblings().removeClass('active');
+                    $(this).addClass('active');
+                    sessionStorage.setItem('currentPage', $(this).find('a').attr('href'));
+                });
+
+                $('.menubar_toggle').click(function(){
+                    $('.menu_lst').toggleClass('collapsed');
+                    $('#container').toggleClass('collapsed');
+                });
+            });
+        </script>
+    </nav>
+</body>
+</html>

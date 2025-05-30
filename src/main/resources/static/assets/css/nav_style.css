@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+nav{position:fixed; width:236px; height:100vh; padding:45px 0 48px 0px; background:#444B59; box-shadow:0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22); transition:0.2s;}
+h1{position:fixed; top:0; left:0; width:236px; height:45px; font-weight:bold; border-bottom:1px solid #575d6a; transition:0.2s;} /* 20231016 추가 */
+h1 a{display:block; color:#fff; padding:9px 25px; font-size:22px;}
+.iframe{width:calc(100% - 260px); height:100vh; margin-left:260px; background-color:#fff;}
+.depth1{color:#fff; padding:16px 0 8px 0; font-size:18px; font-weight:500; line-height:24px;}
+/*.depth1:first-of-type{border-top:1px solid #575d6a;}*/ /* 20231016 삭제 */
+nav dl{padding-left:24px;}
+nav dl a{display:block; color:#999999; font-size:16px;}
+.depth2{padding-bottom:8px; border-bottom:1px solid #575d6a;}
+.depth2_lst li{padding-bottom:8px; line-height:1.8rem;}
+.depth2_lst li a:hover{color:#fff; transition:0.1s;}
+
+footer{position:fixed; bottom:0; padding:24px 0 24px 12px; font-size:12px; color:#fff;}
+
+/* nav */
+.reci_upload::before{display:inline-block; content:""; vertical-align:middle; width:24px; height:24px; background:url("../images/ico_uploader.svg") no-repeat center center; background-size:contain;}
+.reci_modi::before{display:inline-block; content:""; vertical-align:middle; width:24px; height:24px; background:url("../images/ico_dropdown.svg") no-repeat center center; background-size:contain;}
+
+/* collapsed */
+nav.collapsed{width:75px; transition:0.2s;}
+nav.collapsed h1{width:75px;}
+nav.collapsed h1 a{display:none;}
+nav.collapsed dl{padding-left:0;}
+nav.collapsed dl dt{display:none;}
+nav.collapsed .depth2{padding-top:53px;}
+nav.collapsed .depth2_lst li{text-align:center;}
+nav.collapsed .depth2_lst span{display:none;}
+nav.collapsed footer{display:none;}
+.menubar_toggle_wrap{display:flex; justify-content:center; width:100%; margin-top:30px;}
+.menubar_toggle{transition:0.2s;}
+nav.collapsed .menubar_toggle{transform:rotate(180deg);}
+
+/* 공통 */
+.uppercase{text-transform:uppercase;}
+.ico_24{margin-right:5px;}
+.depth2_lst li.active a{color:#fff;}

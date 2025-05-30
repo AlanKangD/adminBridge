@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_discount" transform="translate(-364 -316)">
+    <path id="base" d="M.495.5H.5" transform="translate(373 325)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="path" d="M1.985,12.635l-1.52-1.52a1.606,1.606,0,0,1,0-2.26l1.52-1.52a1.845,1.845,0,0,0,.47-1.13V4.055a1.6,1.6,0,0,1,1.6-1.6H6.2a1.845,1.845,0,0,0,1.13-.47L8.855.465a1.606,1.606,0,0,1,2.26,0l1.52,1.52a1.845,1.845,0,0,0,1.13.47h2.15a1.6,1.6,0,0,1,1.6,1.6V6.2a1.845,1.845,0,0,0,.47,1.13l1.52,1.52a1.606,1.606,0,0,1,0,2.26l-1.52,1.52a1.845,1.845,0,0,0-.47,1.13v2.15a1.6,1.6,0,0,1-1.6,1.6h-2.15a1.845,1.845,0,0,0-1.13.47l-1.52,1.52a1.606,1.606,0,0,1-2.26,0l-1.52-1.52a1.845,1.845,0,0,0-1.13-.47H4.055a1.6,1.6,0,0,1-1.6-1.6v-2.15A1.8,1.8,0,0,0,1.985,12.635Z" transform="translate(366.004 318.025)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M0,6,6,0" transform="translate(373 325)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <g id="path-3" data-name="path" transform="translate(364 316)" fill="none" opacity="0">
+      <path d="M0,0H24V24H0Z" stroke="none"/>
+      <path d="M 1 1 L 1 23 L 23 23 L 23 1 L 1 1 M 0 0 L 24 0 L 24 24 L 0 24 L 0 0 Z" stroke="none" fill="#1f1f1f"/>
+    </g>
+    <path id="path-4" data-name="path" d="M.495.5H.5" transform="translate(378 330)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

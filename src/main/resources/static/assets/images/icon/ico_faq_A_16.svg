@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ico_16_txt_a" transform="translate(-418 -767)">
+    <rect id="base" width="16" height="16" transform="translate(418 767)" fill="none"/>
+    <path id="path" d="M8.746-4.4H3.752L2.869-1.96H.24l4.588-12H7.669l4.571,12H9.611Zm-.671-1.84L6.24-11.364,4.4-6.241Z" transform="translate(417.76 782.96)" fill="#525252"/>
+    <circle id="oval" cx="1.5" cy="1.5" r="1.5" transform="translate(431 779)" fill="#525252"/>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_music_list" transform="translate(-364 -514)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(364 514)" fill="none" opacity="0"/>
+    <path id="path" d="M0,0H20" transform="translate(366 517)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M0,0H9" transform="translate(366 523)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-3" data-name="path" d="M0,0H6" transform="translate(366 529)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-4" data-name="path" d="M0,0H4" transform="translate(366 535)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-5" data-name="path" d="M4.36,2.18A2.18,2.18,0,1,1,2.18,0,2.18,2.18,0,0,1,4.36,2.18Z" transform="translate(373.66 531.64)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-6" data-name="path" d="M7.98,10.373V1.863C7.98.053,6.84-.2,5.69.113L1.34,1.3A1.743,1.743,0,0,0,0,3.053v8.77" transform="translate(378.02 521.997)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-7" data-name="path" d="M4.36,2.18A2.18,2.18,0,1,1,2.18,0,2.18,2.18,0,0,1,4.36,2.18Z" transform="translate(381.64 530.19)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-8" data-name="path" d="M0,2.18,7.98,0" transform="translate(378.02 525.42)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

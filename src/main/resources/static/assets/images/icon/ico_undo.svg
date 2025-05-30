@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_undo" transform="translate(-108 -316)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(132 340) rotate(180)" fill="none" opacity="0"/>
+    <path id="path" d="M3,10h8A5,5,0,0,0,11,0H0" transform="translate(112.13 324.31)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M2.56,5.12,0,2.56,2.56,0" transform="translate(111.87 321.69)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

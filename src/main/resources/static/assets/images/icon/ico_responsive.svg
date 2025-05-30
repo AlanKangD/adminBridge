@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_responsive" transform="translate(-556 -188)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(556 188)" fill="none" opacity="0"/>
+    <path id="path" d="M8,14.42H4.21C.84,14.42,0,13.58,0,10.21v-6C0,.84.84,0,4.21,0H14.74c3.37,0,4.21.84,4.21,4.21" transform="translate(558 190.53)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-2" data-name="path" d="M0,4.52V0" transform="translate(566 204.95)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-3" data-name="path" d="M0,0H8" transform="translate(558 200.95)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-4" data-name="path" d="M0,0H3.26" transform="translate(562.74 209.47)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-5" data-name="path" d="M9.47,2.96V8.67c0,2.37-.59,2.96-2.96,2.96H2.96C.59,11.63,0,11.04,0,8.67V2.96C0,.59.59,0,2.96,0H6.51C8.88,0,9.47.59,9.47,2.96Z" transform="translate(568.53 197.84)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="path-6" data-name="path" d="M.495.5H.5" transform="translate(572.75 205.75)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

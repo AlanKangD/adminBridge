@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic-24-zoom" transform="translate(-421 -4598)">
+    <rect id="base" width="24" height="24" transform="translate(421 4598)" fill="none"/>
+    <g id="icon" transform="translate(424 4602)">
+      <circle id="oval" cx="6" cy="6" r="6" transform="translate(2 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="line" x1="4.262" y1="4.262" transform="translate(11.738 11.738)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

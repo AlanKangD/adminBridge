@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ic-16-arrow-down" transform="translate(16 16) rotate(180)">
+    <rect id="base" width="16" height="16" fill="none"/>
+    <g id="icon" transform="translate(3 6)">
+      <path id="path" d="M0,0,4.707,4.693,9.413,0" fill="none" stroke="#525252" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

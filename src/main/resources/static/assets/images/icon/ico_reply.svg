@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_reply" transform="translate(-492 -314)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(492 314)" fill="none" opacity="0"/>
+    <path id="path" d="M5,16H9l4.45,2.96A1,1,0,0,0,15,18.13V16a4.724,4.724,0,0,0,5-5V5a4.724,4.724,0,0,0-5-5H5A4.724,4.724,0,0,0,0,5v6A4.724,4.724,0,0,0,5,16Z" transform="translate(494 316.43)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

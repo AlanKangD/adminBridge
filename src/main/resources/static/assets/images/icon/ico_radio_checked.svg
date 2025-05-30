@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic-24-radio-checked" transform="translate(26 0.5)">
+    <rect id="base" width="24" height="24" transform="translate(-26 -0.5)" fill="none"/>
+    <g id="icon-check" transform="translate(-81 -444.5)">
+      <g id="base-2" data-name="base" transform="translate(56 445)" fill="#0f62fe" stroke="#0f62fe" stroke-width="1">
+        <rect width="22" height="22" rx="11" stroke="none"/>
+        <rect x="0.5" y="0.5" width="21" height="21" rx="10.5" fill="none"/>
+      </g>
+      <g id="icon" transform="translate(-985.5 -2747.031)">
+        <circle id="oval" cx="4" cy="4" r="4" transform="translate(1048.5 3199.031)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

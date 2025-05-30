@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ico_16_c_right_up" transform="translate(-560 -256)">
+    <path id="base" d="M0,0H16V16H0Z" transform="translate(576 272) rotate(180)" fill="none" opacity="0"/>
+    <path id="path" d="M-2,3.52,3.53-2,9.06,3.52" transform="translate(564.47 263.74)" fill="none" stroke="#0f62fe" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

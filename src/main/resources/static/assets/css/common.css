@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* layout */
+nav{font-size:62.5%;}
+#container{margin-left:236px; transition:0.2s;}
+#container.collapsed{margin-left:75px;}
+.wrapper_bo{position:relative; height:100vh; padding:50px 30px 50px 30px; background-color:#f8f9fc;}
+h2{position:absolute; top:15px; left:30px; font-size:22px; font-weight:bold; color:#303030;}
+.cont_card{background-color:#fff; border-radius:8px; padding:25px; box-shadow:0 0 20px 0 rgba(0, 0, 0, 0.12)}
+.cont_card + .cont_card{margin-top:26px;}

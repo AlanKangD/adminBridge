@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_backward" transform="translate(-748 -386)">
+    <g id="backward">
+      <path id="Vector" d="M9.76,1.945v7.32a1.955,1.955,0,0,1-2.93,1.69L3.66,9.135.49,7.3A1.812,1.812,0,0,1,0,6.895V4.335a1.812,1.812,0,0,1,.49-.41l3.17-1.83L6.83.275A1.94,1.94,0,0,1,9.76,1.945Z" transform="translate(760.24 392.395)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-2" data-name="Vector" d="M10.245,1.945v7.32a1.955,1.955,0,0,1-2.93,1.69l-3.17-1.82L.975,7.3a1.952,1.952,0,0,1,0-3.38l3.17-1.83L7.315.275A1.94,1.94,0,0,1,10.245,1.945Z" transform="translate(749.995 392.395)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(748 386)" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

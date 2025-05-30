@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+.tbl_info{line-height:35px;}
+.tbl_utill{display:flex; justify-content:space-between;}
+.tbl_srch{display:flex; justify-content:space-between;}
+.tbl_srch .input_group{width:245px; margin-left:16px;}
+.tbl_srch .select_box{min-width:180px;}
+.tbl_srch .select_box .select_box_value{font-size:1.4rem;}
+.reci_lst_tbl{margin-top:8px;}
+.reci_lst_tbl.tbl thead{height:45px;}
+.reci_lst_tbl.tbl thead th{text-align:center; font-size:1.8rem;}
+.reci_lst_tbl.tbl tbody td{font-size:1.6rem; cursor:pointer;}
+.reci_lst_tbl.tbl tbody td a{font-size:1.6rem;}
+.reci_lst_tbl.tbl tbody td:nth-child(2){text-align:left;}
+.reci_lst_tbl.tbl tbody td:last-child{padding:5px 16px;}
+.reci_lst_tbl tbody tr:nth-child(even) td{/*background-color:#fafafa;*/ background-color:#fcfcfc;}
+.reci_lst_tbl tbody tr{text-align:center;}
+.recipe_write .page_wrapper{display:flex; justify-content:right; margin-top:16px;}

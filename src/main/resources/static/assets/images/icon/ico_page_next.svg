@@ -1,0 +1,6 @@
+<svg id="ic_24_page_next" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="base" width="24" height="24" fill="none"/>
+  <g id="icon" transform="translate(9 18) rotate(-90)">
+    <path id="path" d="M12,0,6,6,0,0" fill="none" stroke="#525252" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="80" viewBox="0 0 72 80">
+  <g id="elements" transform="translate(-262 -5718)">
+    <g id="ic_16" transform="translate(-243 4903)">
+      <g id="empty" transform="translate(502 863)">
+        <rect id="base" width="16" height="16" transform="translate(3 16)" fill="none"/>
+      </g>
+    </g>
+    <g id="ic_16-2" data-name="ic_16" transform="translate(-243 4887)">
+      <g id="ic-16-write_point_" data-name="ic-16-write(point)" transform="translate(534 863)">
+        <rect id="base-2" data-name="base" width="16" height="16" transform="translate(3 16)" fill="none"/>
+        <g id="icon" transform="translate(-12.877 -9.7)">
+          <path id="path" d="M11.06,3.193l3.75,3.75L7.75,14H4v-3.75Zm4.82,2.68-3.75-3.75L13.96.292a1,1,0,0,1,1.41,0l2.34,2.34a1,1,0,0,1,0,1.41Z" transform="translate(12.877 26.698)" fill="#0f62fe"/>
+        </g>
+      </g>
+      <g id="ic-16-write_gray_" data-name="ic-16-write(gray)" transform="translate(518 863)">
+        <rect id="base-3" data-name="base" width="16" height="16" transform="translate(3 16)" fill="none"/>
+        <g id="icon-2" data-name="icon" transform="translate(-12.877 -9.7)">
+          <path id="path-2" data-name="path" d="M11.06,3.193l3.75,3.75L7.75,14H4v-3.75Zm4.82,2.68-3.75-3.75L13.96.292a1,1,0,0,1,1.41,0l2.34,2.34a1,1,0,0,1,0,1.41Z" transform="translate(12.877 26.698)" fill="#999"/>
+        </g>
+      </g>
+      <g id="ic-16-write_white_" data-name="ic-16-write(white)" transform="translate(502 863)">
+        <rect id="base-4" data-name="base" width="16" height="16" transform="translate(3 16)" fill="none"/>
+        <g id="icon-3" data-name="icon" transform="translate(-12.877 -9.7)">
+          <path id="path-3" data-name="path" d="M11.06,3.193l3.75,3.75L7.75,14H4v-3.75Zm4.82,2.68-3.75-3.75L13.96.292a1,1,0,0,1,1.41,0l2.34,2.34a1,1,0,0,1,0,1.41Z" transform="translate(12.877 26.698)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="ic_24" transform="translate(-38 4615)">
+      <g id="empty-2" data-name="empty" transform="translate(-121 -3471)">
+        <rect id="base-5" data-name="base" width="24" height="24" transform="translate(421 4598)" fill="none"/>
+      </g>
+    </g>
+    <g id="ic_24-2" data-name="ic_24" transform="translate(-38 4591)">
+      <g id="ic-24-zoom_point_" data-name="ic-24-zoom(point)" transform="translate(-73 -3471)">
+        <rect id="base-6" data-name="base" width="24" height="24" transform="translate(421 4598)" fill="none"/>
+        <g id="icon-4" data-name="icon" transform="translate(424 4602)">
+          <circle id="oval" cx="6" cy="6" r="6" transform="translate(2 1)" fill="none" stroke="#0f62fe" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <line id="line" x1="4.262" y1="4.262" transform="translate(11.738 11.738)" fill="none" stroke="#0f62fe" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </g>
+      </g>
+      <g id="ic-24-zoom_gray_" data-name="ic-24-zoom(gray)" transform="translate(-97 -3471)">
+        <rect id="base-7" data-name="base" width="24" height="24" transform="translate(421 4598)" fill="none"/>
+        <g id="icon-5" data-name="icon" transform="translate(424 4602)">
+          <circle id="oval-2" data-name="oval" cx="6" cy="6" r="6" transform="translate(2 1)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <line id="line-2" data-name="line" x1="4.262" y1="4.262" transform="translate(11.738 11.738)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </g>
+      </g>
+      <g id="ic-24-zoom_white_" data-name="ic-24-zoom(white)" transform="translate(-121 -3471)">
+        <rect id="base-8" data-name="base" width="24" height="24" transform="translate(421 4598)" fill="none"/>
+        <g id="icon-6" data-name="icon" transform="translate(424 4602)">
+          <circle id="oval-3" data-name="oval" cx="6" cy="6" r="6" transform="translate(2 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <line id="line-3" data-name="line" x1="4.262" y1="4.262" transform="translate(11.738 11.738)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

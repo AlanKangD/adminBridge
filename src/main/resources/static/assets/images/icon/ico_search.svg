@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_search" transform="translate(-428 -188)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(428 188)" fill="none" opacity="0"/>
+    <g id="path" transform="translate(430 190)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18,9A9,9,0,1,1,9,0,9,9,0,0,1,18,9Z" stroke="none"/>
+      <path d="M 9 1.5 C 4.864489555358887 1.5 1.5 4.864489555358887 1.5 9 C 1.5 13.1355094909668 4.864489555358887 16.5 9 16.5 C 13.1355094909668 16.5 16.5 13.1355094909668 16.5 9 C 16.5 4.864489555358887 13.1355094909668 1.5 9 1.5 M 9 0 C 13.97056007385254 0 18 4.029439926147461 18 9 C 18 13.97056007385254 13.97056007385254 18 9 18 C 4.029439926147461 18 0 13.97056007385254 0 9 C 0 4.029439926147461 4.029439926147461 0 9 0 Z" stroke="none" fill="#1f1f1f"/>
+    </g>
+    <path id="path-2" data-name="path" d="M2,2-3-3" transform="translate(448 208)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

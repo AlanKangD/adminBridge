@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ico_24_share" transform="translate(-556 -252)">
+    <path id="base" d="M0,0H24V24H0Z" transform="translate(580 276) rotate(180)" fill="none" opacity="0"/>
+    <circle id="oval" cx="2.75" cy="2.75" r="2.75" transform="translate(570 254.5)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <circle id="oval-2" data-name="oval" cx="2.75" cy="2.75" r="2.75" transform="translate(559 260.882)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <circle id="oval-3" data-name="oval" cx="2.75" cy="2.75" r="2.75" transform="translate(570 267.5)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <line id="line" x2="6.226" y2="3.628" transform="translate(564 265.501)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <line id="line-2" data-name="line" x1="5.717" y2="3.5" transform="translate(564.5 258.5)" fill="none" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>
