@@ -31,7 +31,7 @@
                 <div class="select_box tbl_select_box">
                   <span class="select_box_arr"></span>
                   <select class="select_box_value" name="recipeType">
-                    <option th:each="category : ${categoryList}" th:value="${category.category_code}" th:text="${category.category_code_nm}"></option>
+                    <option th:each="category : ${categoryList}" th:value="${category.categoryCode}" th:text="${category.categoryCodeNm}"></option>
                   </select>
                 </div>
               </div>
@@ -43,7 +43,7 @@
                   <div class="select_box tbl_select_box">
                     <span class="select_box_arr"></span>
                     <select class="select_box_value" name="recipeTime">
-                      <option th:each="time : ${timeList}" th:value="${time.category_code}" th:text="${time.category_code_nm}"></option>
+                      <option th:each="time : ${timeList}" th:value="${time.categoryCode}" th:text="${time.categoryCodeNm}"></option>
                     </select>
                   </div>
                 </div>
