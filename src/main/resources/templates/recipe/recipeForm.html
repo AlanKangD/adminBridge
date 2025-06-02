@@ -53,7 +53,7 @@
           <div id="divMainPhotoUpload">
             <div id="divMainPhotoBox" class="img_upload_wrap" is_over="0">
               <input type="file" id="imageFile" name="imageFile" style="display:none;">
-              <img id="preview" th:src="@{/assets/images/pic_upload.gif}" style="cursor: pointer;" alt="이미지 업로드 사진" />
+              <img id="preview" onclick="clickImage(this)"  th:src="@{/assets/images/pic_upload.gif}" style="cursor: pointer;" alt="이미지 업로드 사진" />
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
         </div>
         <div class="btn_group">
           <button type="submit" class="btn btn_md btn_primary">레시피 저장</button>
-          <button type="button" class="btn피 btn_md btn_normal">취소</button>
+          <button type="button" class="btn btn_md btn_normal">취소</button>
         </div>
       </div>
 
@@ -142,4 +142,48 @@
   </main>
 
 </body>
+<script>
+  $(document).ready(function() {
+    $('#triggerUpload').click(function() {
+      // 기존 input 제거 (중복 방지)
+      $('#dynamicFileInput').remove();
+
+      // 새로운 input file 생성
+      var $fileInput = $('<input/>', {
+        type: 'file',
+        id: 'dynamicFileInput',
+        name: 'file',
+        style: 'display:none'
+      });
+
+      // body에 추가 후 클릭 이벤트 트리거
+      $('body').append($fileInput);
+      $fileInput.click();
+
+      // change 이벤트 감지하여 Ajax 전송
+      $fileInput.on('change', function() {
+        var file = this.files[0];
+        if (!file) return;
+
+        var formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax({
+          url: '/upload/image',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            console.log('업로드 완료:', response.url);
+            $('#uploadedImage').attr('src', response.url); // 미리보기 업데이트
+          },
+          error: function(xhr) {
+            console.error('업로드 실패', xhr);
+          }
+        });
+      });
+    });
+  });
+</script>
 </html>

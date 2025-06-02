@@ -1,22 +1,22 @@
 var fileCnt = 1;
 $(function(){
 
-    $("#preview").on("click", function() {
-        $('#imageFile').trigger('click');
-    });
-
-    $("#imageFile").on("change", function(event) {
-
-        var file = event.target.files[0];
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-
-            $("#preview").attr("src", e.target.result);
-        }
-
-        reader.readAsDataURL(file);
-    });
+    // $("#preview").on("click", function() {
+    //     $('#imageFile').trigger('click');
+    // });
+    //
+    // $("#imageFile").on("change", function(event) {
+    //
+    //     var file = event.target.files[0];
+    //
+    //     var reader = new FileReader();
+    //     reader.onload = function(e) {
+    //
+    //         $("#preview").attr("src", e.target.result);
+    //     }
+    //
+    //     reader.readAsDataURL(file);
+    // });
 
     //20231101 alan 추가
     /*
@@ -223,35 +223,66 @@ let click = null;
 let clickLocation = null;
 
 function clickImage(obj) {
+    // const nodeCheck = obj.closest('div').childNodes.length;
+    // clickLocation = obj;
+    // if(nodeCheck == 2) {
+    //     click = obj.closest('div').childNodes[0];
+    // } else if (nodeCheck == 5) {
+    //     click = obj.closest('div').childNodes[1];
+    // }
+    // $(click).trigger('click');
+    // $(click).on("change", function(event) {
+    //     var file = event.target.files[0];
+    //     var reader = new FileReader();
+    //     reader.onload = function(e) {
+    //         $(obj).attr("src", e.target.result);
+    //     }
+    //     reader.readAsDataURL(file);
+    // })
 
-    const nodeCheck = obj.closest('div').childNodes.length;
+    // 기존 input 제거 (중복 방지)
+    $(obj).siblings('input[type="file"]').remove();
 
-    clickLocation = obj;
-    console.log('################# obj :: ' + clickLocation);
+    // 새로운 input file 생성
+    var $fileInput = $('<input/>', {
+        type: 'file',
+        name: 'file',
+        style: 'display:none'
+    });
 
-    if(nodeCheck == 2) {
-        click = obj.closest('div').childNodes[0];
-    } else if (nodeCheck == 5) {
-        click = obj.closest('div').childNodes[1];
-    }
-    console.log('################# click input :: ' + click);
+    $(obj).parent().append($fileInput);
+    $fileInput.click();
 
-    $(click).trigger('click');
-
-    $(click).on("change", function(event) {
-        console.log('################### 이미지 변화 완료  :: ' + event);
-
+    // change 이벤트 감지하여 Ajax 전송
+    $fileInput.on('change', function(event) {
         var file = event.target.files[0];
+        if (!file) return;
 
         var reader = new FileReader();
         reader.onload = function(e) {
-
-            $(obj).attr("src", e.target.result);
-        }
-
+            $(obj).attr("src", e.target.result); // 미리보기
+        };
         reader.readAsDataURL(file);
 
-    })
+        var formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax({
+            url: '/upload/image',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log('업로드 완료:', response.url);
+                // 업로드된 이미지 URL을 hidden input에 저장하거나 서버 저장 경로 관리
+                // 필요 시 $(obj).data('uploaded-url', response.url);
+            },
+            error: function(xhr) {
+                console.error('업로드 실패', xhr);
+            }
+        });
+    });
 }
 
 
