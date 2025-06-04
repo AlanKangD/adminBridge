@@ -1,25 +1,26 @@
-package com.chopping.adminbridge.file;
+package com.chopping.adminbridge.file.service;
 
+import com.chopping.adminbridge.file.entity.Attachment;
+import com.chopping.adminbridge.file.repository.AttachmentRepository;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/upload")
-public class FileUploadConroller {
+import java.io.InputStream;
+
+
+@Service
+public class FileUploadService {
 
     @Value("${ftp.server}")
     private String ftpServer;
@@ -33,15 +34,21 @@ public class FileUploadConroller {
     @Value("${ftp.password}")
     private String ftpPassword;
 
+
     private final String uploadDir = "/Users/alankang/Documents/images/imagerepo";
 
-    @PostMapping("/image")
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, InputStream inputStream) {
+    private final AttachmentRepository attachmentRepository;
+
+    public FileUploadService(AttachmentRepository attachmentRepository) {
+        this.attachmentRepository = attachmentRepository;
+    }
+
+    public ResponseEntity<?>  uploadAndSaveFile(MultipartFile file) throws IOException {
         // 파일명 생성 (UUID + 확장자)
         String originalFilename = file.getOriginalFilename();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         String uniqueFileName = UUID.randomUUID().toString() + extension;
-
+        InputStream inputStream = null;
 
 //        try {
 //            // 로컬 디렉토리에 저장
@@ -58,6 +65,8 @@ public class FileUploadConroller {
 
         FTPClient ftpClient = new FTPClient();
         try {
+            inputStream = file.getInputStream();
+
             ftpClient.connect(ftpServer, ftpPort); // FTP 서버 주소와 포트
             ftpClient.login(ftpUser, ftpPassword);      // 계정 로그인
             ftpClient.enterLocalPassiveMode();              // 패시브 모드
@@ -82,6 +91,20 @@ public class FileUploadConroller {
             }
 
             String fileUrl = uploadDir + uniqueFileName; // 예제 URL
+
+            // DB 저장
+            // 파일 정보 DB 저장
+            Attachment att = new Attachment();
+            att.setFileOriginalName(originalFilename);
+            att.setFileChangeName(uniqueFileName);
+            att.setFileSize(String.valueOf(file.getSize()));
+            att.setFileType(file.getContentType());
+            att.setFileDt(LocalDate.now());
+            att.setFilePath("/HDD1/upload/" + uniqueFileName);
+
+            // jpa 를 이용하여 save 기능 추가
+            attachmentRepository.save(att);
+
             return ResponseEntity.ok(Map.of("url", fileUrl));
 
         } catch (IOException e) {
