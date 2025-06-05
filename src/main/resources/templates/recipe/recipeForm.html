@@ -8,7 +8,7 @@
 </head>
 <body layout:fragment="content" >
   <main id="container" class="recipe_write">
-    <form th:action="@{/recipe/recipeBoardWrite}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/recipe/save}" method="post" enctype="multipart/form-data">
       <h2>레시피 등록</h2>
       <div class="sub_card">
         <div class="sub_card_inner">
@@ -37,6 +37,7 @@
               </div>
             </li>
             <li>
+
               <p class="cont_tit">요리정보</p>
               <div class="select_wrap cook_inf">
                 <div class="cook_inf_wrap">
@@ -52,7 +53,7 @@
           </ul>
           <div id="divMainPhotoUpload">
             <div id="divMainPhotoBox" class="img_upload_wrap" is_over="0">
-              <input type="file" id="imageFile" name="imageFile" style="display:none;">
+              <input type="hidden" name="recipeFileName" style="display:none;">
               <img id="preview" onclick="clickImage(this)"  th:src="@{/assets/images/pic_upload.gif}" style="cursor: pointer;" alt="이미지 업로드 사진" />
             </div>
           </div>
@@ -108,7 +109,7 @@
               <textarea name="recipeContent" placeholder="내용을 입력해주세요."></textarea>
             </div>
             <div class="step_pic_wrap">
-              <input type="file" name="stepFile" class="step_upload" accept="image/* multiple">
+              <input type="hidden" name="stepFileName" class="step_upload" accept="image/* multiple">
               <img class="step_pic_add" onclick="clickImage(this)" th:src="@{/assets/images/add_pic.gif}" alt="step 이미지 추가">
             </div>
             <div class="del_btn_wrap">
@@ -137,53 +138,7 @@
           <button type="button" class="btn btn_md btn_normal">취소</button>
         </div>
       </div>
-
     </form>
   </main>
-
 </body>
-<script>
-  $(document).ready(function() {
-    $('#triggerUpload').click(function() {
-      // 기존 input 제거 (중복 방지)
-      $('#dynamicFileInput').remove();
-
-      // 새로운 input file 생성
-      var $fileInput = $('<input/>', {
-        type: 'file',
-        id: 'dynamicFileInput',
-        name: 'file',
-        style: 'display:none'
-      });
-
-      // body에 추가 후 클릭 이벤트 트리거
-      $('body').append($fileInput);
-      $fileInput.click();
-
-      // change 이벤트 감지하여 Ajax 전송
-      $fileInput.on('change', function() {
-        var file = this.files[0];
-        if (!file) return;
-
-        var formData = new FormData();
-        formData.append('file', file);
-
-        $.ajax({
-          url: '/upload/image',
-          type: 'POST',
-          data: formData,
-          processData: false,
-          contentType: false,
-          success: function(response) {
-            console.log('업로드 완료:', response.url);
-            $('#uploadedImage').attr('src', response.url); // 미리보기 업데이트
-          },
-          error: function(xhr) {
-            console.error('업로드 실패', xhr);
-          }
-        });
-      });
-    });
-  });
-</script>
 </html>

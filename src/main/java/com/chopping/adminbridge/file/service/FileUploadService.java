@@ -57,6 +57,19 @@ public class FileUploadService {
 //
 //            // 응답으로 이미지 URL 반환
 //            String fileUrl = uploadDir + uniqueFileName; // 예제 URL
+//            // DB 저장
+//            // 파일 정보 DB 저장
+//            Attachment att = new Attachment();
+//            att.setFileOriginalName(originalFilename);
+//            att.setFileChangeName(uniqueFileName);
+//            att.setFileSize(String.valueOf(file.getSize()));
+//            att.setFileType(file.getContentType());
+//            att.setFileDt(LocalDate.now());
+//            att.setFilePath(uploadDir + uniqueFileName);
+//
+//            // jpa 를 이용하여 save 기능 추가
+//            attachmentRepository.save(att);
+
 //            return ResponseEntity.ok(Map.of("url", fileUrl));
 //        } catch (IOException e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -105,7 +118,7 @@ public class FileUploadService {
             // jpa 를 이용하여 save 기능 추가
             attachmentRepository.save(att);
 
-            return ResponseEntity.ok(Map.of("url", fileUrl));
+            return ResponseEntity.ok(Map.of("fileName", uniqueFileName));
 
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

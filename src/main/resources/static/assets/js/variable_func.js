@@ -1,31 +1,6 @@
 var fileCnt = 1;
 $(function(){
 
-    // $("#preview").on("click", function() {
-    //     $('#imageFile').trigger('click');
-    // });
-    //
-    // $("#imageFile").on("change", function(event) {
-    //
-    //     var file = event.target.files[0];
-    //
-    //     var reader = new FileReader();
-    //     reader.onload = function(e) {
-    //
-    //         $("#preview").attr("src", e.target.result);
-    //     }
-    //
-    //     reader.readAsDataURL(file);
-    // });
-
-    //20231101 alan 추가
-    /*
-    $("#addItemButton").on("click", function() {
-        var text = "<li><input type='text' class='input_text' placeholder='예) 재료명'><input type='text' class='input_text' placeholder='예) 용량'><button class='btn btn_md btn_secondary btn_radius btn_icon material_lst_del' onclick='deleteList(this)'><i class='ico_del white ico_24'></i></button></li>";
-        $(".material_lst").append(text);
-    });
-    */
-
     $('#etc_reg').on("click", function(){
         let lstWrapTxt = '<li class="material_inner">';
         lstWrapTxt += '<input type="hidden" name="recipeEtcIngredient" value="startPoint">';
@@ -120,22 +95,8 @@ $(function(){
         lstWrapTxt += '</li>';
         lstWrapTxt += '</ui>';
 
-       // const myList = document.getElementById('material_wrap');
-       // const textNode = document.createTextNode(lstWrapTxt);
-
-        console.log($('#etcList'));
-
         $('#etcList').append(lstWrapTxt);
 
-
-        console.log($('#etcList'));
-        //myList.append(lstWrapTxt);
-
-       // myList.appendChild(textNode);
-
-        //console.log(document.getElementById('material_wrap'));
-
-        //$('#etcList').append(lstWrapTxt);
     });
 });
 
@@ -200,7 +161,7 @@ function addStep(obj){
     text += "<textarea name='recipeContent' placeholder='내용을 입력해주세요.'></textarea>";
     text += "</div>";
     text += "<div class='step_pic_wrap'>";
-    text += "<input type='file' name='stepFile' class='step_upload' accept='image/* multiple'>";
+    text += "<input type='hidden' name='stepFileName' class='step_upload' accept='image/* multiple'>";
     text += "<img class='step_pic_add' onclick='clickImage(this)' src='/assets/images/add_pic.gif' alt='step 이미지 추가'>";
     text += "</div>";
     text += "<div class='del_btn_wrap'>";
@@ -223,25 +184,10 @@ let click = null;
 let clickLocation = null;
 
 function clickImage(obj) {
-    // const nodeCheck = obj.closest('div').childNodes.length;
-    // clickLocation = obj;
-    // if(nodeCheck == 2) {
-    //     click = obj.closest('div').childNodes[0];
-    // } else if (nodeCheck == 5) {
-    //     click = obj.closest('div').childNodes[1];
-    // }
-    // $(click).trigger('click');
-    // $(click).on("change", function(event) {
-    //     var file = event.target.files[0];
-    //     var reader = new FileReader();
-    //     reader.onload = function(e) {
-    //         $(obj).attr("src", e.target.result);
-    //     }
-    //     reader.readAsDataURL(file);
-    // })
 
     // 기존 input 제거 (중복 방지)
     $(obj).siblings('input[type="file"]').remove();
+    var hiddenValue = $(obj).parent().find('input[type="hidden"]').first().val();
 
     // 새로운 input file 생성
     var $fileInput = $('<input/>', {
@@ -274,8 +220,10 @@ function clickImage(obj) {
             processData: false,
             contentType: false,
             success: function(response) {
-                console.log('업로드 완료:', response.url);
+                console.log('업로드 완료:', response.body.fileName);
+               // $('#recipeFileName').val(response.body.fileName);
                 // 업로드된 이미지 URL을 hidden input에 저장하거나 서버 저장 경로 관리
+                $(obj).parent().find('input[type="hidden"]').first().val(response.body.fileName);
                 // 필요 시 $(obj).data('uploaded-url', response.url);
             },
             error: function(xhr) {

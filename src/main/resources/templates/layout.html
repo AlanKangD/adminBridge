@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title layout:title-pattern="$DECORATOR_TITLE - ALAN 레시피">ALAN 레시피</title>
+    <title layout:title-pattern="ALAN 레시피">ALAN 레시피</title>
     <th:block th:replace="fragments/head :: commonHead"></th:block> <!-- 공통 CSS/JS -->
 </head>
 <body>
 <div id="wrap">
 <header th:replace="fragments/navigation :: navigation"></header> <!-- 공통 메뉴 -->
+
+    <!-- 메시지 팝업 영역: 모든 페이지에서 이 레이아웃을 쓰면 자동으로 찍힙니다. -->
+<div th:replace="fragments/messagePopup :: messagePopup"></div>
+
 <main layout:fragment="content">
     <!-- 개별 페이지 콘텐츠가 여기 들어감 -->
 </main>

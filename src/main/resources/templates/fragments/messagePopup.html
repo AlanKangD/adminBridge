@@ -1,0 +1,22 @@
+<!-- src/main/resources/templates/fragments/messagePopup.html -->
+<!— 전체를 fragment로 감싸두면 ’th:replace‘ 등으로 찍어낼 수 있습니다. —>
+<div th:fragment="messagePopup">
+    <!-- 성공 메시지(녹색 배경) -->
+    <div th:if="${message}"
+         style="background-color: #e0f7e9;
+              color: #2e7d32;
+              padding: 10px;
+              margin-bottom: 1rem;
+              border-radius: 4px;">
+        <p th:text="${message}"></p>
+    </div>
+    <!-- 오류 메시지(빨간 배경) -->
+    <div th:if="${error}"
+         style="background-color: #fdecea;
+              color: #c62828;
+              padding: 10px;
+              margin-bottom: 1rem;
+              border-radius: 4px;">
+        <p th:text="${error}"></p>
+    </div>
+</div>
