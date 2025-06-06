@@ -6,10 +6,7 @@ import com.chopping.adminbridge.recipe.service.CategoryCodeService;
 import com.chopping.adminbridge.recipe.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,7 +45,9 @@ public class RecipeController {
     @PostMapping("/save")
     public String saveRecipe(@ModelAttribute RecipeFormDto recipeFormDto, Model model, MultipartHttpServletRequest mul, RedirectAttributes redirectAttrs) throws Exception {
         try {
+
             recipeService.createRecipe(recipeFormDto, mul);
+
             // 등록 성공 시 메시지를 flash attribute로 담고, 목록 페이지로 리다이렉트
             redirectAttrs.addFlashAttribute("message", "레시피가 성공적으로 등록되었습니다.");
             return "redirect:/recipe/list";
@@ -61,11 +60,30 @@ public class RecipeController {
         }
     }
 
-    @GetMapping("/recipe/list")
-    public String recipeListPage(Model model) {
-        // 목록 데이터 조회
-        //model.addAttribute("recipes", /* 서비스에서 가져온 모든 레시피 리스트 */);
-        return "recipe/list";
+    @GetMapping("/list")
+    public String recipeListPage(@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+                                 Model model) {
+
+        int currentPage = pageNo;
+        int pagePerScreen = 10;
+        int itemCountPerOnPage = 10;
+        int endRowNo = currentPage * itemCountPerOnPage;
+        int startRowNo = endRowNo - itemCountPerOnPage;
+
+        RecipeFormDto search = new RecipeFormDto(); // 페이지 정보 전달용
+        search.setStart(startRowNo);
+        search.setEnd(endRowNo);
+
+        List<RecipeFormDto> list = recipeService.selectRecipeList(search);
+        //int listTotalCnt = recipeService.listTotalCnt(search);
+
+        model.addAttribute("list", list);
+        //model.addAttribute("pageNo", pageNo);
+        //model.addAttribute("paging", Paging.getPage(listTotalCnt, itemCountPerOnPage, pagePerScreen, currentPage));
+        //model.addAttribute("listTotalCnt", listTotalCnt + 1);
+        //model.addAttribute("content", "recipeList");
+
+        return "recipe/recipeList";
     }
 
 }

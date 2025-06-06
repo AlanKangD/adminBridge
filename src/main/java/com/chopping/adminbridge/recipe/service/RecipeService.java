@@ -9,6 +9,9 @@ import com.chopping.adminbridge.recipe.repository.RecipeDetailRepository;
 import com.chopping.adminbridge.recipe.repository.RecipeIngredientRepository;
 import com.chopping.adminbridge.recipe.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,6 +97,30 @@ public class RecipeService {
         }
         ///  step 3 end ///
 
+    }
+
+
+    public List<RecipeFormDto> selectRecipeList(RecipeFormDto searchDto) {
+        int page = searchDto.getStart() / 10; // 페이지 계산 (0부터 시작)
+        int size = 10;
+
+        PageRequest pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "recipeNo"));
+        Page<Recipe> resultPage = recipeRepository.findAll(pageable);
+
+        List<RecipeFormDto> result = new ArrayList<>();
+        for (Recipe recipe : resultPage.getContent()) {
+            RecipeFormDto dto = new RecipeFormDto();
+            dto.setRecipeNo(recipe.getRecipeNo().intValue());
+            dto.setRecipeName(recipe.getRecipeName());
+            dto.setRecipeType(recipe.getRecipeType());
+            dto.setRecipeRegDt(java.sql.Date.valueOf(recipe.getRecipeRegDt()));
+            dto.setRecipeLike(recipe.getRecipeLike());
+            dto.setRecipeViewCnt(recipe.getRecipeViewCnt());
+            // 필요시 다른 필드도 추가로 세팅
+            result.add(dto);
+        }
+
+        return result;
     }
 
     public List splitCheckType(String text) {

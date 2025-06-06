@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title layout:title="레시피 목록">레시피 목록</title>
+</head>
+<body layout:fragment="content" >
+
+<div id="wrap">
+  <form th:action="@{/recipe/list}" method="post" id="form">
+    <input type="hidden" id="pageNo" name="pageNo" th:value="${pageNo}" />
+
+    <main id="container" class="recipe_write">
+      <h2>레시피 목록</h2>
+      <div class="cont_card">
+
+        <!-- 검색 영역 -->
+        <div class="tbl_utill">
+          <p class="tbl_info">검색결과 <span th:text="${listTotalCnt}">0</span>건</p>
+          <div class="tbl_srch">
+            <div class="select_box tbl_select_box">
+              <select name="category" class="select_box_value">
+                <option value="">카테고리</option>
+                <!-- 필요한 옵션 렌더링 -->
+              </select>
+            </div>
+            <div class="input_group">
+              <input type="text" name="keyword" class="input_text" placeholder="내용을 입력해 주세요." />
+              <button class="btn btn_sm btn_secondary btn_icon" type="submit"><i class="ico_zoom white ico_24"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 테이블 -->
+        <table class="tbl tbl_line reci_lst_tbl">
+          <thead>
+          <tr class="tbl_primary">
+<!--            <th>No</th>-->
+            <th>요리명</th>
+            <th>카테고리</th>
+            <th>등록일</th>
+            <th>조회수</th>
+            <th>좋아요</th>
+            <th>삭제</th>
+          </tr>
+          </thead>
+          <tbody class="tbl_divider">
+          <tr th:each="recipe, iterStat : ${list}">
+<!--            <td th:text="${listTotalCnt - iterStat.index}">1</td>-->
+            <td>
+              <a th:href="@{/recipe/modify(recipeNo=${recipe.recipeNo})}"
+                 th:text="${recipe.recipeName}">레시피명</a>
+            </td>
+            <td th:text="${recipe.recipeType}">한식</td>
+            <td th:text="${#dates.format(recipe.recipeRegDt, 'yyyy-MM-dd')}">2025-01-01</td>
+            <td th:text="${recipe.recipeViewCnt}">0</td>
+            <td th:text="${recipe.recipeLike}">0</td>
+            <td class="lst_del">
+              <button type="button" th:onclick="'deleteRecipe(' + ${recipe.recipeNo} + ')'"
+                      class="btn btn_sm btn_white btn_icon">
+                <i class="ico_close primary ico_24"></i>
+              </button>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(list)}">
+            <td colspan="7"><strong>등록된 글이 없습니다.</strong></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- 페이징 -->
+        <div class="page_wrapper" th:utext="${paging}"></div>
+      </div>
+    </main>
+  </form>
+</div>
+
+<!-- 스크립트 -->
+<script th:inline="javascript">
+  function deleteRecipe(recipeNo) {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      fetch('/recipe/delete/' + recipeNo, {
+        method: 'POST'
+      }).then(() => {
+        alert('삭제되었습니다.');
+        location.reload();
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
