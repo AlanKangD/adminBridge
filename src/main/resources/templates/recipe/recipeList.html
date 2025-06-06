@@ -9,7 +9,7 @@
 <body layout:fragment="content" >
 
 <div id="wrap">
-  <form th:action="@{/recipe/list}" method="post" id="form">
+  <form method="post" id="form">
     <input type="hidden" id="pageNo" name="pageNo" th:value="${pageNo}" />
 
     <main id="container" class="recipe_write">
@@ -18,7 +18,7 @@
 
         <!-- 검색 영역 -->
         <div class="tbl_utill">
-          <p class="tbl_info">검색결과 <span th:text="${listTotalCnt}">0</span>건</p>
+          <p class="tbl_info">검색결과 <span th:text="${page.totalElements}">0</span>건</p>
           <div class="tbl_srch">
             <div class="select_box tbl_select_box">
               <select name="category" class="select_box_value">
@@ -71,7 +71,21 @@
         </table>
 
         <!-- 페이징 -->
-        <div class="page_wrapper" th:utext="${paging}"></div>
+        <div class="page_wrapper">
+          <ul>
+            <li th:if="${page.hasPrevious()}">
+              <a th:href="@{/recipe/list(page=${page.number - 1})}">이전</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+              <a th:href="@{/recipe/list(page=${i})}"
+                 th:text="${i + 1}"
+                 th:classappend="${i == page.number} ? 'active'">1</a>
+            </li>
+            <li th:if="${page.hasNext()}">
+              <a th:href="@{/recipe/list(page=${page.number + 1})}">다음</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </main>
   </form>

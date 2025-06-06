@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -61,27 +65,12 @@ public class RecipeController {
     }
 
     @GetMapping("/list")
-    public String recipeListPage(@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
-                                 Model model) {
-
-        int currentPage = pageNo;
-        int pagePerScreen = 10;
-        int itemCountPerOnPage = 10;
-        int endRowNo = currentPage * itemCountPerOnPage;
-        int startRowNo = endRowNo - itemCountPerOnPage;
-
-        RecipeFormDto search = new RecipeFormDto(); // 페이지 정보 전달용
-        search.setStart(startRowNo);
-        search.setEnd(endRowNo);
-
-        List<RecipeFormDto> list = recipeService.selectRecipeList(search);
-        //int listTotalCnt = recipeService.listTotalCnt(search);
-
-        model.addAttribute("list", list);
-        //model.addAttribute("pageNo", pageNo);
-        //model.addAttribute("paging", Paging.getPage(listTotalCnt, itemCountPerOnPage, pagePerScreen, currentPage));
-        //model.addAttribute("listTotalCnt", listTotalCnt + 1);
-        //model.addAttribute("content", "recipeList");
+    public String recipeListPage(
+            @PageableDefault(size = 10, sort = "recipeNo", direction = Sort.Direction.DESC) Pageable pageable,
+            Model model) {
+        Page<RecipeFormDto> page = recipeService.selectRecipeList(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("list", page.getContent());
 
         return "recipe/recipeList";
     }

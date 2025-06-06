@@ -1,6 +1,5 @@
 package com.chopping.adminbridge.recipe.service;
 
-import com.chopping.adminbridge.file.service.FileUploadService;
 import com.chopping.adminbridge.recipe.dto.RecipeFormDto;
 import com.chopping.adminbridge.recipe.entity.Recipe;
 import com.chopping.adminbridge.recipe.entity.RecipeDetail;
@@ -10,11 +9,9 @@ import com.chopping.adminbridge.recipe.repository.RecipeIngredientRepository;
 import com.chopping.adminbridge.recipe.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.time.LocalDate;
@@ -29,7 +26,6 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final RecipeDetailRepository recipeDetailRepository ;
-    private final FileUploadService fileUploadService;
 
     /**
      * 레시피 전체 등록 로직
@@ -100,15 +96,10 @@ public class RecipeService {
     }
 
 
-    public List<RecipeFormDto> selectRecipeList(RecipeFormDto searchDto) {
-        int page = searchDto.getStart() / 10; // 페이지 계산 (0부터 시작)
-        int size = 10;
-
-        PageRequest pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "recipeNo"));
+    public Page<RecipeFormDto> selectRecipeList(Pageable pageable) {
         Page<Recipe> resultPage = recipeRepository.findAll(pageable);
 
-        List<RecipeFormDto> result = new ArrayList<>();
-        for (Recipe recipe : resultPage.getContent()) {
+        return resultPage.map(recipe -> {
             RecipeFormDto dto = new RecipeFormDto();
             dto.setRecipeNo(recipe.getRecipeNo().intValue());
             dto.setRecipeName(recipe.getRecipeName());
@@ -117,10 +108,8 @@ public class RecipeService {
             dto.setRecipeLike(recipe.getRecipeLike());
             dto.setRecipeViewCnt(recipe.getRecipeViewCnt());
             // 필요시 다른 필드도 추가로 세팅
-            result.add(dto);
-        }
-
-        return result;
+            return dto;
+        });
     }
 
     public List splitCheckType(String text) {
