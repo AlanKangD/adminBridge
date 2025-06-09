@@ -35,21 +35,30 @@
                   <span class="select_box_arr"></span>
                   <select class="select_box_value" name="recipeType">
                     <!-- 여기서 어떻게 처리할 지 고민 -->
-                    <option th:each="category : ${categoryList}" th:value="${category.categoryCode}" th:text="${category.categoryCodeNm}"></option>
+                    <option th:each="category : ${categoryList}"
+                            th:value="${category.categoryCode}"
+                            th:text="${category.categoryCodeNm}"
+                            th:selected="${category.categoryCode == recipeForm.recipeType}">
+                    </option>
                   </select>
                 </div>
               </div>
             </li>
             <li>
 
-              <p class="cont_tit">요리정보</p>
+              <p class="cont_tit">요리시간</p>
               <div class="select_wrap cook_inf">
                 <div class="cook_inf_wrap">
                   <div class="select_box tbl_select_box">
                     <span class="select_box_arr"></span>
                     <select class="select_box_value" name="recipeTime">
                       <!-- 여기서 어떻게 처리할 지 고민 -->
-                      <option th:each="time : ${timeList}" th:value="${time.categoryCode}" th:text="${time.categoryCodeNm}"></option>
+                      <option th:each="time : ${timeList}"
+                              th:value="${time.categoryCode}"
+                              th:text="${time.categoryCodeNm}"
+                              th:selected="${time.categoryCode == recipeForm.recipeTime}">
+                      </option>
+
                     </select>
                   </div>
                 </div>
