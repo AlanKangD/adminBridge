@@ -2,6 +2,7 @@ package com.chopping.adminbridge.recipe.dto;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +57,8 @@ public class RecipeFormDto {
     private List<String> recipeEtc;
     private List<String> recipeEtcIngredient;
     private List<String> recipeEtcQuantity;
+    private Map<String, List<IngredientDto>> ingredientGroupMap;
+
 
 
 }

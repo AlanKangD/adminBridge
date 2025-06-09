@@ -1,5 +1,6 @@
 package com.chopping.adminbridge.recipe.service;
 
+import com.chopping.adminbridge.recipe.dto.IngredientDto;
 import com.chopping.adminbridge.recipe.dto.RecipeFormDto;
 import com.chopping.adminbridge.recipe.entity.Recipe;
 import com.chopping.adminbridge.recipe.entity.RecipeDetail;
@@ -17,7 +18,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -156,6 +159,21 @@ public class RecipeService {
         dto.setRecipeEtc(etcGroupList);
         dto.setRecipeEtcIngredient(ingredientNames);
         dto.setRecipeEtcQuantity(quantities);
+
+        // 계층 구조를 group 화 하여 새로 생성 소스
+        // 재료 정보 조회 (그룹핑된 형태로 재구성)
+        Map<String, List<IngredientDto>> grouped = new LinkedHashMap<>();
+
+        for (RecipeIngredient ing : ingredients) {
+            String groupName = ing.getEtcGroup();
+            String quantityStr = ing.getQuantity() + (ing.getUnit() != null ? ing.getUnit() : "");
+
+            grouped.putIfAbsent(groupName, new ArrayList<>());
+            grouped.get(groupName).add(new IngredientDto(ing.getIngredientName(), quantityStr));
+        }
+
+        dto.setIngredientGroupMap(grouped);
+
 
         return dto;
     }
