@@ -29,19 +29,29 @@ public class RecipeController {
 
 
     @GetMapping("/form")
-    public String recipeForm(Model model) {
-
-        // 1) 빈 DTO를 하나 생성해서 "recipeForm"이라는 이름으로 모델에 담아준다.
-        model.addAttribute("recipeForm", new RecipeFormDto());
-
+    public String recipeForm(@RequestParam(value = "recipeNo",required = false) Long recipeNo, Model model) {
         // jpa 를 이용한 카테고리, 요리정보 데이터 가져오는 로직
         // 카테고리 리스트 데이터
         List<CategoryCode> categoryList = categoryCodeService.getActiveCategoryCodes("category");
         model.addAttribute("categoryList", categoryList);
-
         // 요리정보 리스트 (예: 시간 정보)
         List<CategoryCode> timeList = categoryCodeService.getActiveCategoryCodes("timeInfo");
         model.addAttribute("timeList", timeList);
+
+        if (recipeNo != null) {
+            // 1. 기본 레시피 정보 조회
+            RecipeFormDto recipeDto = recipeService.getRecipeDetail(recipeNo);
+            model.addAttribute("recipeForm", recipeDto);
+            model.addAttribute("mode", "modify");
+            model.addAttribute("formAction", "/recipe/update");
+
+        } else {
+            // 1) 빈 DTO를 하나 생성해서 "recipeForm"이라는 이름으로 모델에 담아준다.
+            model.addAttribute("recipeForm", new RecipeFormDto());
+            model.addAttribute("mode", "create");
+            model.addAttribute("formAction", "/recipe/save");
+
+        }
 
         return "recipe/recipeForm";
     }

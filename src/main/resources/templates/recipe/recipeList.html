@@ -50,7 +50,7 @@
           <tr th:each="recipe, iterStat : ${list}">
 <!--            <td th:text="${listTotalCnt - iterStat.index}">1</td>-->
             <td>
-              <a th:href="@{/recipe/modify(recipeNo=${recipe.recipeNo})}"
+              <a th:href="@{/recipe/form(recipeNo=${recipe.recipeNo})}"
                  th:text="${recipe.recipeName}">레시피명</a>
             </td>
             <td th:text="${recipe.recipeType}">한식</td>
@@ -93,6 +93,16 @@
 
 <!-- 스크립트 -->
 <script th:inline="javascript">
+
+    $('table tr td').on('click', function(e){
+
+        // td 태그를 클릭 시에 버튼 onclick 이벤트를 잡아 먹어 삭제 버튼은 예외처리
+        if(this.className == 'lst_del') {
+            return ;
+        }
+        location.href= $(this).children('a').attr('href');
+    });
+
   function deleteRecipe(recipeNo) {
     if (confirm('정말 삭제하시겠습니까?')) {
       fetch('/recipe/delete/' + recipeNo, {

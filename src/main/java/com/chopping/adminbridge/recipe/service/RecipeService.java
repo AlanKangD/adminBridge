@@ -112,6 +112,54 @@ public class RecipeService {
         });
     }
 
+
+    @Transactional(readOnly = true)
+    public RecipeFormDto getRecipeDetail(Long recipeNo) {
+        Recipe recipe = recipeRepository.findById(recipeNo)
+                .orElseThrow(() -> new IllegalArgumentException("해당 레시피가 존재하지 않습니다."));
+
+        RecipeFormDto dto = new RecipeFormDto();
+        dto.setRecipeNo(recipe.getRecipeNo().intValue());
+        dto.setRecipeName(recipe.getRecipeName());
+        dto.setRecipeType(recipe.getRecipeType());
+        dto.setRecipeExplanation(recipe.getRecipeExplanation());
+        dto.setRecipeTip(recipe.getRecipeTip());
+        dto.setRecipePerson(
+                recipe.getRecipePerson() != null ? String.valueOf(recipe.getRecipePerson()) : null);
+        dto.setRecipeTime(
+                recipe.getRecipeTime() != null ? String.valueOf(recipe.getRecipeTime()) : null);
+        dto.setRecipeFileName(recipe.getRecipeFileName());
+
+        // Step 정보 조회
+        List<RecipeDetail> details = recipeDetailRepository
+                .findByRecipe_RecipeNoOrderByRecipeDetailStepAsc(recipeNo);
+        List<String> contents = new ArrayList<>();
+        List<String> imageNames = new ArrayList<>();
+        for (RecipeDetail detail : details) {
+            contents.add(detail.getRecipeDetailContent());
+            imageNames.add(detail.getRecipeDetailImageName());
+        }
+        dto.setRecipeContents(contents);
+        dto.setStepFileNames(imageNames);
+
+        // 재료 정보 조회
+        List<RecipeIngredient> ingredients = recipeIngredientRepository
+                .findByRecipe_RecipeNo(recipeNo);
+        List<String> etcGroupList = new ArrayList<>();
+        List<String> ingredientNames = new ArrayList<>();
+        List<String> quantities = new ArrayList<>();
+        for (RecipeIngredient ing : ingredients) {
+            etcGroupList.add(ing.getEtcGroup());
+            ingredientNames.add(ing.getIngredientName());
+            quantities.add(ing.getQuantity() + (ing.getUnit() != null ? ing.getUnit() : ""));
+        }
+        dto.setRecipeEtc(etcGroupList);
+        dto.setRecipeEtcIngredient(ingredientNames);
+        dto.setRecipeEtcQuantity(quantities);
+
+        return dto;
+    }
+
     public List splitCheckType(String text) {
         List resultList = new ArrayList();
         String[] whiteList = {"g","T" ,"t" ,"ml" ,"L" ,"kg", "개"};
