@@ -11,7 +11,7 @@
 
     <form th:action="@{${formAction}}" method="post" enctype="multipart/form-data">
     <!-- 제목 -->
-      <h2 th:text="${mode == 'create'} ? '레시피 등록' : '레시피 수정'">레시피 등록</h2>
+      <h2 th:text="${mode == 'create'} ? '레시피 등록' : '레시피 보기'">레시피 등록</h2>
       <!-- Step 1 -->
       <div class="sub_card">
         <div class="sub_card_inner">
@@ -182,7 +182,7 @@
           </ul>
         </div>
         <div class="btn_group">
-          <button type="submit" class="btn btn_md btn_primary">레시피 저장</button>
+          <button type="submit" th:text="${mode == 'create'} ? '레시피 저장' : '레시피 수정'" class="btn btn_md btn_primary">레시피 저장</button>
           <button type="button" class="btn btn_md btn_normal">취소</button>
         </div>
       </div>
