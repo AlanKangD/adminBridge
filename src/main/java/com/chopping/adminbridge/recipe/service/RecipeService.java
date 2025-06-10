@@ -61,6 +61,7 @@ public class RecipeService {
         String[] quantity = mul.getParameterValues("recipeEtcQuantity");
 
         int checkPoint = 0;
+
         for(int i=0; i < ingredient.length; i++) {
             if(ingredient[i].equals("startPoint")){  //startPoint 가 시작되면 추가 재료영역이 있는 flag값
                 checkPoint++;
@@ -72,7 +73,8 @@ public class RecipeService {
             List result = splitCheckType(quantity[i]);
             save.setQuantity((String) result.get(0));
             save.setUnit((String) result.get(1));
-
+            save.setCreatedDate(LocalDate.from(LocalDateTime.now()));
+            save.setUseYn("Y");  // ✅ 추가
             // join 관계의 어노테이션 작업으로 saved 객제 모두 전달
             save.setRecipe(saved);
             recipeIngredientRepository.save(save);
@@ -90,11 +92,93 @@ public class RecipeService {
             detail.setRecipeDetailImageName(stepFileName[i]);
             detail.setRecipeDetailContent(recipeContent[i]);
             detail.setRecipeDetailStep(i+1);
+            detail.setUseYn("Y");  // ✅ 추가
+
             detail.setRecipe(saved);
             detail.setRecipeDetailDt(LocalDate.from(LocalDateTime.now()));
             recipeDetailRepository.save(detail);
         }
         ///  step 3 end ///
+
+    }
+    /**
+     * 레시피 전체 수정 로직
+     */
+    @Transactional
+    public void updateRecipe(RecipeFormDto dto, MultipartHttpServletRequest mul) throws Exception {
+
+        /// step1 ///
+        Recipe recipe = recipeRepository.findById((long) dto.getRecipeNo())
+                .orElseThrow(() -> new IllegalArgumentException("해당 레시피가 존재하지 않습니다."));
+        recipe.setRecipeName(dto.getRecipeName());
+        recipe.setRecipeExplanation(dto.getRecipeExplanation());
+        recipe.setRecipeTip(dto.getRecipeTip());
+        recipe.setRecipeFileName(dto.getRecipeFileName());
+        recipe.setRecipeType(dto.getRecipeType());
+        recipe.setRecipeTime(Integer.valueOf(dto.getRecipeTime()));
+        recipe.setRecipeDisplay("Y");  // 기본값 유지
+        recipe.setRecipeDel("N");      // 기본값 유지
+        recipe.setRecipeModDt(LocalDate.from(LocalDateTime.now())); // 수정일자 갱신
+        Recipe saved = recipeRepository.save(recipe);
+        /// step1 end///
+
+        /// step2 ///
+        // 기존 재료 데이터를 삭제 대신 'N' 처리
+        List<RecipeIngredient> oldIngredients = recipeIngredientRepository.findByRecipe_RecipeNoAndUseYn((long) dto.getRecipeNo(), "Y");
+        for (RecipeIngredient old : oldIngredients) {
+            old.setUseYn("N");
+            // 필요 시 수정일자 등 추가
+        }
+        String[] recipeEtc =  mul.getParameterValues("recipeEtc");
+        String[] ingredient = mul.getParameterValues("recipeEtcIngredient");
+        String[] quantity = mul.getParameterValues("recipeEtcQuantity");
+
+
+        // save 와 같은 로직이지만 -1로 checkPonit 를 준것은
+        // recipeForm 페이지에서 수정하면 startPoint 가 없어서 첫 시작부터 넣었기 때문
+        int checkPoint = -1;
+        for(int i=0; i < ingredient.length; i++) {
+            if(ingredient[i].equals("startPoint")){  //startPoint 가 시작되면 추가 재료영역이 있는 flag값
+                checkPoint++;
+                continue;
+            }
+            RecipeIngredient save = new RecipeIngredient();
+            save.setEtcGroup(recipeEtc[checkPoint]);
+            save.setIngredientName(ingredient[i]);
+            List result = splitCheckType(quantity[i]);
+            save.setQuantity((String) result.get(0));
+            save.setUnit((String) result.get(1));
+            save.setCreatedDate(LocalDate.from(LocalDateTime.now()));
+            save.setUseYn("Y");  // ✅ 추가
+            // join 관계의 어노테이션 작업으로 saved 객제 모두 전달
+            save.setRecipe(saved);
+            recipeIngredientRepository.save(save);
+        }
+
+        /// step2 end ///
+
+        /// step3 ///
+        List<RecipeDetail> existingDetails = recipeDetailRepository.findByRecipe_RecipeNoAndUseYnOrderByRecipeDetailStepAsc((long) dto.getRecipeNo(), "Y");
+        for (RecipeDetail detail : existingDetails) {
+            detail.setUseYn("N");
+            recipeDetailRepository.save(detail);
+        }
+
+        String[] recipeContent =  mul.getParameterValues("recipeContent");
+        String[] stepFileName =  mul.getParameterValues("stepFileName");
+
+
+        for(int i=0; i < recipeContent.length; i++) {
+            RecipeDetail detail = new RecipeDetail();   // → 매번 새 객체
+            detail.setRecipeDetailImageName(stepFileName[i]);
+            detail.setRecipeDetailContent(recipeContent[i]);
+            detail.setRecipeDetailStep(i+1);
+            detail.setRecipe(saved);
+            detail.setUseYn("Y");  // ✅ 추가
+            detail.setRecipeDetailDt(LocalDate.from(LocalDateTime.now()));
+            recipeDetailRepository.save(detail);
+        }
+        /// step3 ///
 
     }
 
@@ -135,7 +219,7 @@ public class RecipeService {
 
         // Step 정보 조회
         List<RecipeDetail> details = recipeDetailRepository
-                .findByRecipe_RecipeNoOrderByRecipeDetailStepAsc(recipeNo);
+                .findByRecipe_RecipeNoAndUseYnOrderByRecipeDetailStepAsc(recipeNo, "Y");
         List<String> contents = new ArrayList<>();
         List<String> imageNames = new ArrayList<>();
         for (RecipeDetail detail : details) {
@@ -147,7 +231,7 @@ public class RecipeService {
 
         // 재료 정보 조회
         List<RecipeIngredient> ingredients = recipeIngredientRepository
-                .findByRecipe_RecipeNo(recipeNo);
+                .findByRecipe_RecipeNoAndUseYn(recipeNo, "Y");
         List<String> etcGroupList = new ArrayList<>();
         List<String> ingredientNames = new ArrayList<>();
         List<String> quantities = new ArrayList<>();

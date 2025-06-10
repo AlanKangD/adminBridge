@@ -35,7 +35,7 @@ public class FileUploadService {
     private String ftpPassword;
 
 
-    private final String uploadDir = "/Users/alankang/Documents/images/imagerepo";
+    private final String uploadDir = "/Users/alankang/Documents/images/imagerepo/";
 
     private final AttachmentRepository attachmentRepository;
 
@@ -70,7 +70,7 @@ public class FileUploadService {
             // jpa 를 이용하여 save 기능 추가
             attachmentRepository.save(att);
 
-            return ResponseEntity.ok(Map.of("url", fileUrl));
+            return ResponseEntity.ok(Map.of("fileName", uniqueFileName));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "File upload failed"));

@@ -10,6 +10,7 @@
   <main id="container" class="recipe_write">
 
     <form th:action="@{${formAction}}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="recipeNo" th:value="${recipeForm.recipeNo}" />
     <!-- 제목 -->
       <h2 th:text="${mode == 'create'} ? '레시피 등록' : '레시피 보기'">레시피 등록</h2>
       <!-- Step 1 -->
@@ -113,6 +114,9 @@
               </div>
             </li>
             <li class="material_inner" th:each="entry : ${recipeForm.ingredientGroupMap}">
+              <input type="hidden" name="recipeEtcIngredient" value="startPoint">
+              <input type="hidden" name="recipeEtcQuantity" value="startPoint">
+
               <div class="input_group input_area material_tit">
                 <input type="text" name="recipeEtc" class="input_text" th:value="${entry.key}" placeholder="재료 묶음 이름" />
                 <button type="button" class="btn btn_sm btn_secondary mat_innr_minus" onclick="deleteListWrap(this)">

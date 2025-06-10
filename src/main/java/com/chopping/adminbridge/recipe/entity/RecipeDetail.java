@@ -56,6 +56,9 @@ public class RecipeDetail {
     @Column(name = "recipe_detail_dt", nullable = false)
     private LocalDate recipeDetailDt;
 
+    @Column(name = "use_yn")
+    private String useYn;
+
     /**
      * 생성자 호출 시 즉시 현재 날짜로 세팅하거나,
      * JPA가 INSERT 시 자동으로 채우려면 별도 어노테이션을 추가로 붙일 수 있습니다.

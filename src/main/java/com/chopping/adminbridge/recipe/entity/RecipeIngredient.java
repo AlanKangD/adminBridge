@@ -47,6 +47,9 @@ public class RecipeIngredient {
     @Column(name = "recipe_etc_dt")
     private LocalDate createdDate;
 
+    @Column(name = "use_yn", length = 1)
+    private String useYn;
+
     /**
      * FK → RECIPE 테이블의 recipe_no
      * ManyToOne 관계: 여러 개의 RecipeIngredient는 하나의 Recipe에 속함

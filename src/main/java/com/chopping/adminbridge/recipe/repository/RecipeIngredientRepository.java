@@ -9,5 +9,5 @@ import java.util.List;
 public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredient, Long> {
     // 필요 시 추가 메서드 작성
     // RecipeIngredientRepository
-    List<RecipeIngredient> findByRecipe_RecipeNo(Long recipeNo);
+    List<RecipeIngredient> findByRecipe_RecipeNoAndUseYn(Long recipeNo, String useYn);
 }

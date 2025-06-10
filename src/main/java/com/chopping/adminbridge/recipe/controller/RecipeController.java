@@ -74,6 +74,24 @@ public class RecipeController {
         }
     }
 
+    @PostMapping("/update")
+    public String updateRecipe(@ModelAttribute RecipeFormDto recipeFormDto, Model model, MultipartHttpServletRequest mul, RedirectAttributes redirectAttrs) throws Exception {
+        try {
+
+            recipeService.updateRecipe(recipeFormDto, mul);
+
+            // 등록 성공 시 메시지를 flash attribute로 담고, 목록 페이지로 리다이렉트
+            redirectAttrs.addFlashAttribute("message", "레시피가 성공적으로 수정되었습니다.");
+            return "redirect:/recipe/list";
+        } catch (Exception e) {
+            // 예외(유효성 검사 실패, DB 오류 등) 발생 시 실패 메시지와 함께 다시 등록 폼으로
+            redirectAttrs.addFlashAttribute("error", "등록 중 오류가 발생했습니다: " + e.getMessage());
+            // 폼에 입력했던 값들을 모델에 다시 담아서 보여주고 싶다면 dto를 addFlashAttribute에 같이 담아두면 됩니다.
+            redirectAttrs.addFlashAttribute("recipeForm", recipeFormDto);
+            return "redirect:/recipe/form";
+        }
+    }
+
     @GetMapping("/list")
     public String recipeListPage(
             @PageableDefault(size = 10, sort = "recipeNo", direction = Sort.Direction.DESC) Pageable pageable,
