@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class HomeController { // 로그인 페이지 등 공통으로 사용되는 controller
     @GetMapping("/login")
     public String home() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -15,7 +15,7 @@ public class HomeController {
             return "redirect:/recipe/list";
         }
 
-        return "login";  // templates/index.html 반환
+        return "login";
     }
 
 }
