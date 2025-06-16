@@ -44,8 +44,8 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/admin", true)
+                        .loginProcessingUrl("/loginProcess")
+                        .defaultSuccessUrl("/recipe/form", true) // 로그인 성공 시 메인 페이지로 이동
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
