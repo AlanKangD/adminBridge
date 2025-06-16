@@ -1,7 +1,9 @@
 package com.chopping.adminbridge.auth.controller;
 
 import com.chopping.adminbridge.auth.dto.LoginRequest;
+import com.chopping.adminbridge.auth.dto.SignupRequest;
 import com.chopping.adminbridge.member.entity.Member;
+import com.chopping.adminbridge.member.repository.MemberRepository;
 import com.chopping.adminbridge.security.CustomUserDetails;
 import com.chopping.adminbridge.security.jwt.JwtTokenProvider;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -23,6 +26,40 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @GetMapping("/secure")
+    public ResponseEntity<String> securedEndpoint(Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        return ResponseEntity.ok("✅ 인증된 사용자: " + userDetails.getUsername());
+    }
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
+        /// API 통신으로 회원가입을 처리하도록 구성
+        // 이메일 중복 확인
+        if (memberRepository.findByEmail(request.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("이미 존재하는 이메일입니다.");
+        }
+
+        // id 중복 확인
+        if (memberRepository.findByMemberId(request.getMemberId()).isPresent()) {
+            return ResponseEntity.badRequest().body("이미 존재하는 아이디입니다.");
+        }
+
+        // 비밀번호 암호화 후 저장
+        Member newMember = Member.builder()
+                .memberId(request.getMemberId())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .nickname(request.getNickname())
+                .role("ROLE_USER")
+                .useYn("Y")
+                .build();
+
+        memberRepository.save(newMember);
+        return ResponseEntity.ok("회원가입이 완료되었습니다.");
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {

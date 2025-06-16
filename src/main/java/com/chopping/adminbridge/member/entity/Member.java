@@ -23,7 +23,7 @@ public class Member implements UserDetails {
     @Column(name = "member_no")
     private Long memberNo;
 
-    @Column(name = "member_id", nullable = false, unique = true, length = 100)
+    @Column(name = "member_id", nullable = false,  length = 100)
     private String memberId; // 사용자 ID
 
     @Column(name = "email", nullable = false, unique = true, length = 100)
