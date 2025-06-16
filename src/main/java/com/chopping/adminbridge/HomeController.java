@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    @GetMapping("/")
+    @GetMapping("/login")
     public String home() {
-        return "index";  // templates/index.html 반환
+        return "login";  // templates/index.html 반환
     }
 
 }
