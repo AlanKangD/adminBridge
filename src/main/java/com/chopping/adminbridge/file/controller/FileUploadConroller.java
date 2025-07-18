@@ -47,6 +47,8 @@ public class FileUploadConroller {
         Path imagePath = Paths.get("/Users/alankang/Documents/images/imagerepo", fileName);
         Resource resource = new UrlResource(imagePath.toUri());
 
+        System.out.println("######## url : " + resource);
+
         if (!resource.exists()) {
             return ResponseEntity.notFound().build();
         }
