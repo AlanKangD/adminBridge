@@ -35,7 +35,10 @@ public class FileUploadService {
     private String ftpPassword;
 
 
-    private final String uploadDir = "/Users/alankang/Documents/images/imagerepo/";
+   // private final String uploadDir = "/Users/alankang/Documents/images/imagerepo/";
+
+    // 맥미니 서버 이미지 경로 마운트
+    private final String uploadDir = "/app/uploaded_images/";
 
     private final AttachmentRepository attachmentRepository;
 
