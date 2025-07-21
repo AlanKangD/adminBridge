@@ -264,7 +264,7 @@ public class RecipeService {
 
     public List splitCheckType(String text) {
         List resultList = new ArrayList();
-        String[] whiteList = {"g","T" ,"t" ,"ml" ,"L" ,"kg", "개"};
+        String[] whiteList = {"g","T" ,"t" ,"ml" ,"L" ,"kg", "개", "모"};
         for(int i=0; i < whiteList.length; i++) {
             if(text.indexOf(whiteList[i]) > 0){
                 String substring = text.substring(0, text.indexOf(whiteList[i]));
