@@ -4,6 +4,7 @@ import com.chopping.adminbridge.recipe.dto.RecipeFormDto;
 import com.chopping.adminbridge.recipe.entity.CategoryCode;
 import com.chopping.adminbridge.recipe.service.CategoryCodeService;
 import com.chopping.adminbridge.recipe.service.RecipeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -103,6 +104,13 @@ public class RecipeController {
         model.addAttribute("list", page.getContent());
 
         return "recipe/recipeList";
+    }
+
+    @PostMapping("/delete/{recipeNo}")
+    public ResponseEntity<Void> deleteRecipe(@PathVariable Long recipeNo) {
+        // 레시피 삭제 로직
+        recipeService.deleteRecipe(recipeNo);
+        return ResponseEntity.ok().build();
     }
 
 }

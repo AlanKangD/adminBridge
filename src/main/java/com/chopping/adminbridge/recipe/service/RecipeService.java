@@ -184,7 +184,11 @@ public class RecipeService {
 
 
     public Page<RecipeFormDto> selectRecipeList(Pageable pageable) {
-        Page<Recipe> resultPage = recipeRepository.findAll(pageable);
+        //기존 소스 리스트
+        //Page<Recipe> resultPage = recipeRepository.findAll(pageable);
+
+        // N값이 아닌 값만 조회
+        Page<Recipe> resultPage = recipeRepository.findByRecipeDel("N", pageable);
 
         return resultPage.map(recipe -> {
             RecipeFormDto dto = new RecipeFormDto();
@@ -262,6 +266,21 @@ public class RecipeService {
         return dto;
     }
 
+    @Transactional
+    public void deleteRecipe(Long recipeNo) {
+        // 1. 데이터베이스에서 해당 엔티티를 ID로 조회하여 영속성 컨텍스트로 불러옵니다.
+        // findById는 Optional을 반환하므로 .orElseThrow() 등으로 처리합니다.
+        Recipe recipe = recipeRepository.findById(recipeNo)
+                .orElseThrow(() -> new IllegalArgumentException("Recipe not found with id: " + recipeNo));
+
+        // 2. 엔티티의 필드 값을 'Y'으로 변경합니다.
+        recipe.setRecipeDel("Y");
+
+        // 3. (선택 사항) 변경된 엔티티를 명시적으로 저장할 수 있지만, @Transactional 내부에서는
+        // JPA 영속성 컨텍스트가 변경을 감지하여 트랜잭션 커밋 시 자동으로 UPDATE 쿼리를 날려줍니다.
+        // recipeRepository.save(recipe); // save는 있어도 되고 없어도 됩니다 (일반적으로 변경 감지).
+    }
+
     public List splitCheckType(String text) {
         List resultList = new ArrayList();
         String[] whiteList = {"g","T" ,"t" ,"ml" ,"L" ,"kg", "개", "모"};
@@ -275,4 +294,6 @@ public class RecipeService {
         }
         return null;
     }
+
+
 }
