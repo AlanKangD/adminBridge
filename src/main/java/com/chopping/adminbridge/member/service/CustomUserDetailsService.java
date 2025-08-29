@@ -1,13 +1,14 @@
 package com.chopping.adminbridge.member.service;
 
 
-import com.chopping.adminbridge.member.entity.Member;
-import com.chopping.adminbridge.member.repository.MemberRepository;
-import com.chopping.adminbridge.security.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.chopping.adminbridge.common.security.CustomUserDetails;
+import com.chopping.adminbridge.member.entity.Member;
+import com.chopping.adminbridge.member.repository.MemberRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

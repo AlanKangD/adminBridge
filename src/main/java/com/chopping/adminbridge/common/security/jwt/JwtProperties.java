@@ -1,9 +1,10 @@
-package com.chopping.adminbridge.auth.jwt;
+package com.chopping.adminbridge.common.security.jwt;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 // JwtProperties.java
 @Component
