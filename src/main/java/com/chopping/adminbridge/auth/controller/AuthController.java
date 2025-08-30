@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chopping.adminbridge.auth.dto.LoginRequest;
-import com.chopping.adminbridge.auth.dto.SignupRequest;
+import com.chopping.adminbridge.auth.dto.request.LoginRequest;
+import com.chopping.adminbridge.auth.dto.request.SignupRequest;
 import com.chopping.adminbridge.common.security.CustomUserDetails;
 import com.chopping.adminbridge.common.security.jwt.JwtTokenProvider;
 import com.chopping.adminbridge.member.entity.Member;

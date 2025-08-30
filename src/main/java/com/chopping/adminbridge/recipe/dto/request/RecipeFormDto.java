@@ -1,4 +1,4 @@
-package com.chopping.adminbridge.recipe.dto;
+package com.chopping.adminbridge.recipe.dto.request;
 
 import java.sql.Date;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.chopping.adminbridge.recipe.dto;
+package com.chopping.adminbridge.recipe.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
