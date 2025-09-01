@@ -138,13 +138,13 @@ p {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 900;
-  src: url("../font/NotoSansKR/NotoSansKR-Black.eot"), url("../font/NotoSansKR/NotoSansKR-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/NotoSansKR/NotoSansKR-Black.woff") format("woff"), url("../fonts/NotoSansKR/NotoSansKR-Black.woff2") format("woff2"), url("../fonts/NotoSansKR/NotoSansKR-Black.otf") format("opentype"), url("../fonts/NotoSansKR/NotoSansKR-Black.svg#NotoSansKR") format("svg"); /* Legacy iOS */
+  src: url("../fonts/NotoSansKR/NotoSansKR-Black.woff2") format("woff2"), url("../fonts/NotoSansKR/NotoSansKR-Black.woff") format("woff");
 }
 @font-face {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 700;
-  src: url("../font/NotoSansKR/NotoSansKR-Bold.eot"), url("../font/NotoSansKR/NotoSansKR-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/NotoSansKR/NotoSansKR-Bold.woff") format("woff"), url("../fonts/NotoSansKR/NotoSansKR-Bold.woff2") format("woff2"), url("../fonts/NotoSansKR/NotoSansKR-Bold.otf") format("opentype"), url("../fonts/NotoSansKR/NotoSansKR-Bold.svg#NotoSansKR") format("svg");
+  src: url("../fonts/NotoSansKR/NotoSansKR-Bold.woff2") format("woff2"), url("../fonts/NotoSansKR/NotoSansKR-Bold.woff") format("woff");
 }
 @font-face {
   font-family: "Noto Sans KR";
