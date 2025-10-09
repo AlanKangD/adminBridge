@@ -25,6 +25,8 @@ import java.util.UUID;
 @RequestMapping("/upload")
 public class FileUploadConroller {
 
+    // private final String imageRepoDir = "/Users/alankang/Documents/images/imagerepo/";
+
     private final String imageRepoDir = "/app/uploaded_images/"; // Docker Compose에서 마운트한 컨테이너 내부 경로와 일치
 
 

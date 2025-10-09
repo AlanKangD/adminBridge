@@ -1,5 +1,9 @@
 package com.chopping.adminbridge.common.config;
 
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -7,9 +11,6 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
-import org.springdoc.core.models.GroupedOpenApi;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Swagger / OpenAPI 3 설정 (springdoc 2.x for Spring Boot 3.x)
@@ -65,13 +66,26 @@ public class SwaggerConfig {
     }
 
     /**
-     * 레시피 API 그룹
+     * 레시피 API 그룹 (REST API)
      */
     @Bean
     public GroupedOpenApi recipeApi() {
         return GroupedOpenApi.builder()
                 .group("recipe")
-                .packagesToScan("com.chopping.adminbridge.recipe")
+                .packagesToScan("com.chopping.adminbridge.recipe.controller")
+                .pathsToMatch("/api/recipe/**")
+                .build();
+    }
+
+    /**
+     * 홈 API 그룹 (REST API)
+     */
+    @Bean
+    public GroupedOpenApi homeApi() {
+        return GroupedOpenApi.builder()
+                .group("home")
+                .packagesToScan("com.chopping.adminbridge")
+                .pathsToMatch("/api/home/**")
                 .build();
     }
 
@@ -86,8 +100,10 @@ public class SwaggerConfig {
                 .packagesToScan(
                         "com.chopping.adminbridge.auth",
                         "com.chopping.adminbridge.file",
-                        "com.chopping.adminbridge.recipe"
+                        "com.chopping.adminbridge.recipe.controller",
+                        "com.chopping.adminbridge"
                 )
+                .pathsToMatch("/api/**")
                 .build();
     }
 }
