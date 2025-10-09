@@ -38,7 +38,13 @@ public class SecurityConfig {
                 //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))   // ✅ JWT와 세션 로그인 둘 다 가능
                 .authorizeHttpRequests(auth -> auth
+                        // 공개 접근 허용
                         .requestMatchers("/login", "/api/auth/**", "/oauth2/**").permitAll()
+                        // Swagger UI 접근 허용 (개발/테스트 환경)
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        // 정적 리소스 허용
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
+                        // 나머지는 인증 필요
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

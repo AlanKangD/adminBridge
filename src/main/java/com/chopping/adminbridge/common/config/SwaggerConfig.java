@@ -62,6 +62,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("file")
                 .packagesToScan("com.chopping.adminbridge.file")
+                .pathsToMatch("/upload/**")
                 .build();
     }
 
@@ -103,7 +104,7 @@ public class SwaggerConfig {
                         "com.chopping.adminbridge.recipe.controller",
                         "com.chopping.adminbridge"
                 )
-                .pathsToMatch("/api/**")
+                .pathsToMatch("/api/**", "/upload/**")
                 .build();
     }
 }
