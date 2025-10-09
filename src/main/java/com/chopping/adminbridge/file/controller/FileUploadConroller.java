@@ -1,39 +1,52 @@
 package com.chopping.adminbridge.file.controller;
 
-import com.chopping.adminbridge.file.service.FileUploadService;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.chopping.adminbridge.file.service.FileUploadService;
 
 @RestController
 @RequestMapping("/upload")
 public class FileUploadConroller {
 
-    // private final String imageRepoDir = "/Users/alankang/Documents/images/imagerepo/";
-
-    private final String imageRepoDir = "/app/uploaded_images/"; // Docker Compose에서 마운트한 컨테이너 내부 경로와 일치
-
+    @Value("${file.upload.local-path}")
+    private String localPath;
+    
+    @Value("${file.upload.docker-path}")
+    private String dockerPath;
+    
+    @Value("${file.upload.active}")
+    private String activeEnvironment;
 
     private final FileUploadService fileUploadService;
 
     public FileUploadConroller(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
+    }
+    
+    /**
+     * 현재 환경에 따른 이미지 저장 경로 반환
+     */
+    private String getImageRepoDir() {
+        return "local".equals(activeEnvironment) ? localPath : dockerPath;
     }
 
     @PostMapping("/image")
@@ -50,8 +63,8 @@ public class FileUploadConroller {
     @ResponseBody
     public ResponseEntity<Resource> showImage(@RequestParam String fileName) {
         try {
-            // 호스트 경로 대신, 컨테이너 내부의 마운트된 경로를 사용
-            Path imagePath = Paths.get(imageRepoDir, fileName);
+            // 현재 환경에 따른 이미지 경로 사용
+            Path imagePath = Paths.get(getImageRepoDir(), fileName);
             Resource resource = new UrlResource(imagePath.toUri());
 
             System.out.println("######## url : " + resource);

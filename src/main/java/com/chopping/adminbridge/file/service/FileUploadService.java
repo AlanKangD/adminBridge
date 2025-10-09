@@ -1,22 +1,20 @@
 package com.chopping.adminbridge.file.service;
 
-import com.chopping.adminbridge.file.entity.Attachment;
-import com.chopping.adminbridge.file.repository.AttachmentRepository;
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.UUID;
-
-import java.io.InputStream;
+import com.chopping.adminbridge.file.entity.Attachment;
+import com.chopping.adminbridge.file.repository.AttachmentRepository;
 
 
 @Service
@@ -33,17 +31,27 @@ public class FileUploadService {
 
     @Value("${ftp.password}")
     private String ftpPassword;
-
-
-   // private final String uploadDir = "/Users/alankang/Documents/images/imagerepo/";
-
-    // 맥미니 서버 이미지 경로 마운트
-    private final String uploadDir = "/app/uploaded_images/";
+    
+    @Value("${file.upload.local-path}")
+    private String localPath;
+    
+    @Value("${file.upload.docker-path}")
+    private String dockerPath;
+    
+    @Value("${file.upload.active}")
+    private String activeEnvironment;
 
     private final AttachmentRepository attachmentRepository;
 
     public FileUploadService(AttachmentRepository attachmentRepository) {
         this.attachmentRepository = attachmentRepository;
+    }
+    
+    /**
+     * 현재 환경에 따른 업로드 경로 반환
+     */
+    private String getUploadDir() {
+        return "local".equals(activeEnvironment) ? localPath : dockerPath;
     }
 
     public ResponseEntity<?>  uploadAndSaveFile(MultipartFile file) throws IOException {
@@ -54,6 +62,9 @@ public class FileUploadService {
         InputStream inputStream = null;
 
         try {
+            // 현재 환경에 따른 업로드 경로 사용
+            String uploadDir = getUploadDir();
+            
             // 로컬 디렉토리에 저장
             File dest = new File(uploadDir + uniqueFileName);
             file.transferTo(dest);
