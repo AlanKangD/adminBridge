@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chopping.adminbridge.file.entity.Attachment;
 import com.chopping.adminbridge.file.repository.AttachmentRepository;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 @Service
 public class FileUploadService {
@@ -54,7 +58,7 @@ public class FileUploadService {
         return "local".equals(activeEnvironment) ? localPath : dockerPath;
     }
 
-    public ResponseEntity<?>  uploadAndSaveFile(MultipartFile file) throws IOException {
+    public ResponseEntity<?>  uploadAndSaveFile(MultipartFile file, String filePath) throws IOException {
         // 파일명 생성 (UUID + 확장자)
         String originalFilename = file.getOriginalFilename();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -64,9 +68,17 @@ public class FileUploadService {
         try {
             // 현재 환경에 따른 업로드 경로 사용
             String uploadDir = getUploadDir();
+
+
+            // 1. 파일이 저장될 '디렉터리 경로'만으로 Path 객체를 생성합니다.
+            Path directoryPath = Paths.get(uploadDir + filePath);
+
+            // 2. 디렉터리를 생성합니다. (이미 존재하면 아무 일도 하지 않고, 없으면 새로 만듭니다)
+            Files.createDirectories(directoryPath);
             
             // 로컬 디렉토리에 저장
-            File dest = new File(uploadDir + uniqueFileName);
+            // 3. 이제 디렉터리가 존재하므로 안심하고 파일을 저장합니다.
+            File dest = new File(directoryPath.toString() + "/" + uniqueFileName);
             file.transferTo(dest);
 
             // 응답으로 이미지 URL 반환
@@ -79,7 +91,7 @@ public class FileUploadService {
             att.setFileSize(String.valueOf(file.getSize()));
             att.setFileType(file.getContentType());
             att.setFileDt(LocalDate.now());
-            att.setFilePath(uploadDir + uniqueFileName);
+            att.setFilePath(directoryPath.toString() + "/" + uniqueFileName);
 
             // jpa 를 이용하여 save 기능 추가
             attachmentRepository.save(att);

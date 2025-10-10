@@ -198,6 +198,7 @@ function clickImage(obj) {
 
         var formData = new FormData();
         formData.append('file', file);
+        formData.append("filePath", "recipe")
 
         $.ajax({
             url: '/upload/image',

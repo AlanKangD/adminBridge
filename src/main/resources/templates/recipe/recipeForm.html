@@ -72,7 +72,7 @@
               <input type="hidden" name="recipeFileName" th:value="${recipeForm.recipeFileName}" style="display:none;">
               <img id="preview"
                    onclick="clickImage(this)"
-                   th:src="${#strings.isEmpty(recipeForm.recipeFileName)} ? '/assets/images/pic_upload.gif' : '/upload/showImage?fileName=' + ${recipeForm.recipeFileName}"
+                   th:src="${#strings.isEmpty(recipeForm.recipeFileName)} ? '/assets/images/pic_upload.gif' : '/upload/showImage?fileName=' + ${recipeForm.recipeFileName} + '&sysCode=' + ${sysCode}"
                    style="cursor: pointer;"
                    alt="이미지 업로드 사진" />
             </div>
@@ -175,7 +175,7 @@
               <input type="hidden" name="stepFileName" th:value="${recipeForm.stepFileNames[iterStat.index]}" class="step_upload" accept="image/* multiple">
               <img class="step_pic_add" onclick="clickImage(this)" th:src="${#strings.isEmpty(recipeForm.stepFileNames[iterStat.index])} ?
                      '/assets/images/add_pic.gif' :
-                     '/upload/showImage?fileName=' + ${recipeForm.stepFileNames[iterStat.index]}" alt="step 이미지 추가">
+                     '/upload/showImage?fileName=' + ${recipeForm.stepFileNames[iterStat.index]} + '&sysCode=' + ${sysCode}" alt="step 이미지 추가">
             </div>
             <div class="del_btn_wrap">
               <button class="btn btn_md btn_secondary btn_radius btn_icon material_lst_del" onclick="deleteList(this);"><i class="ico_del white ico_24"></i></button>

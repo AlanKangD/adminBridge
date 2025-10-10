@@ -49,6 +49,7 @@ public class RecipeController {
             // 1. 기본 레시피 정보 조회
             RecipeFormDto recipeDto = recipeService.getRecipeDetail(recipeNo);
             model.addAttribute("recipeForm", recipeDto);
+            model.addAttribute("sysCode", "recipe");
             model.addAttribute("mode", "modify");
             model.addAttribute("formAction", "/recipe/update");
 

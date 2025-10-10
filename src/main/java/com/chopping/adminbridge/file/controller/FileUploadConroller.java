@@ -50,9 +50,9 @@ public class FileUploadConroller {
     }
 
     @PostMapping("/image")
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, InputStream inputStream) {
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("filePath") String filePath) {
         try {
-            ResponseEntity<?> path = fileUploadService.uploadAndSaveFile(file);
+            ResponseEntity<?> path = fileUploadService.uploadAndSaveFile(file, filePath);
             return ResponseEntity.ok().body(path);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("파일 업로드 실패: " + e.getMessage());
@@ -61,10 +61,12 @@ public class FileUploadConroller {
 
     @GetMapping("/showImage")
     @ResponseBody
-    public ResponseEntity<Resource> showImage(@RequestParam String fileName) {
+    public ResponseEntity<Resource> showImage(@RequestParam String fileName, @RequestParam("sysCode") String sysCode)  {
         try {
+            String filePath = getImageRepoDir() + sysCode + "/";
+
             // 현재 환경에 따른 이미지 경로 사용
-            Path imagePath = Paths.get(getImageRepoDir(), fileName);
+            Path imagePath = Paths.get(filePath, fileName);
             Resource resource = new UrlResource(imagePath.toUri());
 
             System.out.println("######## url : " + resource);
