@@ -41,3 +41,4 @@ public class HomeRestController {
         return ResponseEntity.ok().body("시스템이 정상적으로 동작 중입니다.");
     }
 }
+
