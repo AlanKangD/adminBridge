@@ -17,7 +17,7 @@ public class FileUtil {
 
     private static final String[] ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp"};
     private static final String[] ALLOWED_DOCUMENT_EXTENSIONS = {".pdf", ".doc", ".docx", ".txt"};
-    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+    private static final long MAX_FILE_SIZE = 25 * 1024 * 1024; // 25MB (가장 큰 파일 19.7MB 대응)
 
     /**
      * 파일 확장자 검증

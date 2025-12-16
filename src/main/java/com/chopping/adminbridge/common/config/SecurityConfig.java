@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))   // ✅ JWT와 세션 로그인 둘 다 가능
                 .authorizeHttpRequests(auth -> auth
                         // 공개 접근 허용
-                        .requestMatchers("/login", "/api/auth/**", "/oauth2/**", "/upload/**").permitAll()
+                        .requestMatchers("/login", "/api/auth/**", "/oauth2/**", "/api/file/**").permitAll()
                         // Swagger UI 접근 허용 (개발/테스트 환경)
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         // 정적 리소스 허용
@@ -93,7 +93,8 @@ public class SecurityConfig {
         configuration.setAllowedOriginPatterns(Arrays.asList(
                 "http://localhost:3000",
                 "http://192.168.177.159:3000",
-                "http://127.0.0.1:3000"
+                "http://127.0.0.1:3000",
+                "https://www.chopping.kr"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));

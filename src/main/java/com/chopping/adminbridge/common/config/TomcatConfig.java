@@ -19,16 +19,18 @@ public class TomcatConfig {
             // 예를 들어, 20개의 파일을 허용하려면 "20"으로 설정합니다.
             connector.setProperty("maxFileCount", "200");
 
-            // 필요하다면 다른 설정도 여기에 추가할 수 있습니다.
-            // connector.setProperty("maxPostSize", "10485760"); // 10MB
-            // connector.setProperty("maxSavePostSize", "10485760"); // 10MB
+            // Tomcat 커넥터의 최대 POST 크기 설정 (100MB = 104857600 bytes)
+            connector.setProperty("maxPostSize", "104857600"); // 100MB
+            connector.setProperty("maxSavePostSize", "104857600"); // 100MB
         });
     }
 
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize(DataSize.ofMegabytes(10));
+        // 파일 크기 제한을 50MB로 증가 (WebP 변환 시 원본 파일이 클 수 있음)
+        factory.setMaxFileSize(DataSize.ofMegabytes(50));
+        // 요청 전체 크기 제한을 100MB로 유지
         factory.setMaxRequestSize(DataSize.ofMegabytes(100));
 
         // ⚠️ maxFileCount는 설정할 수 없음 → 직접 제한해야 함 (아래 방법 2)

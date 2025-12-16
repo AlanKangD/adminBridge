@@ -45,8 +45,8 @@ public class CommonConstants {
     public static final String PHONE_PATTERN = "^01[0-9]-[0-9]{4}-[0-9]{4}$";
     
     // 파일 크기 제한 (바이트)
-    public static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-    public static final long MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+    public static final long MAX_FILE_SIZE = 25 * 1024 * 1024; // 25MB (가장 큰 파일 19.7MB 대응)
+    public static final long MAX_IMAGE_SIZE = 25 * 1024 * 1024; // 25MB
     
     // 허용된 파일 확장자
     public static final String[] ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp"};

@@ -1,12 +1,28 @@
 package com.chopping.adminbridge.file.service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.spi.IIORegistry;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.imageio.stream.ImageOutputStream;
+
+import com.sksamuel.scrimage.ImmutableImage;
+import com.sksamuel.scrimage.webp.WebpWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chopping.adminbridge.file.entity.Attachment;
 import com.chopping.adminbridge.file.repository.AttachmentRepository;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 @Service
@@ -49,6 +61,7 @@ public class FileUploadService {
 
     public FileUploadService(AttachmentRepository attachmentRepository) {
         this.attachmentRepository = attachmentRepository;
+
     }
     
     /**
@@ -162,4 +175,92 @@ public class FileUploadService {
 //            }
 //        }
     }
+
+//    public String convertToWebP(MultipartFile file, String targetDir) throws IOException {
+//        // 파일명 null 체크
+//        String originalFilename = file.getOriginalFilename();
+//        if (originalFilename == null || originalFilename.isEmpty()) {
+//            throw new IOException("파일명이 없습니다.");
+//        }
+//
+//        // 원본 이미지 읽기
+//        BufferedImage image = ImageIO.read(file.getInputStream());
+//        if (image == null) {
+//            throw new IOException("이미지 파일이 아닙니다.");
+//        }
+//
+//        // 저장 경로 준비
+//        Path dir = Paths.get(targetDir);
+//        if (!Files.exists(dir)) {
+//            Files.createDirectories(dir);
+//        }
+//
+//        // 파일명 변환 (확장자 제거 후 .webp 추가)
+//        String baseName = originalFilename;
+//        int lastDotIndex = originalFilename.lastIndexOf('.');
+//        if (lastDotIndex > 0) {
+//            baseName = originalFilename.substring(0, lastDotIndex);
+//        }
+//        String outputName = baseName + ".webp";
+//        Path outputPath = dir.resolve(outputName);
+//
+//        // WebP로 저장 (ImageWriter 명시적 사용)
+//        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("webp");
+////        if (!writers.hasNext()) {
+////            throw new IOException("WebP writer를 찾을 수 없습니다. imageio-webp 라이브러리가 클래스패스에 있는지 확인하세요.");
+////        }
+//
+//        Thumbnails.of(file.getInputStream())
+//                .scale(1.0)
+//                .outputQuality(0.85)
+//                .outputFormat("webp")
+//                .toFile(outputName);
+//
+//        ImageWriter writer = writers.next();
+//        ImageWriteParam writeParam = writer.getDefaultWriteParam();
+//
+//        // 품질 설정 (0.0 ~ 1.0)
+//        if (writeParam.canWriteCompressed()) {
+//            writeParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+//            writeParam.setCompressionQuality(0.85f);
+//        }
+//
+//        try (ImageOutputStream outputStream = ImageIO.createImageOutputStream(outputPath.toFile())) {
+//            writer.setOutput(outputStream);
+//            IIOImage iioImage = new IIOImage(image, null, null);
+//            writer.write(null, iioImage, writeParam);
+//        } finally {
+//            writer.dispose();
+//        }
+//
+//        return outputPath.toString();
+//    }
+
+    public String convertToWebpWithScrimage(MultipartFile file, String targetDir, boolean lossless) throws IOException {
+        // 1. 디렉터리 준비
+        Path dir = Paths.get(targetDir);
+        Files.createDirectories(dir);
+
+        // 2. 임시 파일 또는 최종 원본 파일 저장
+        String baseName = Optional.ofNullable(file.getOriginalFilename())
+                .orElse("image")
+                .replaceAll("\\.(?=[^.]+$)", "");
+        Path originalPath = dir.resolve(baseName + "_original");
+        Files.copy(file.getInputStream(), originalPath);
+
+        // 3. Scrimage로 WebP 변환
+        File originalFile = originalPath.toFile();
+        File outputFile = dir.resolve(baseName + ".webp").toFile();
+
+        ImmutableImage image = ImmutableImage.loader().fromFile(originalFile);
+        WebpWriter writer = lossless
+                ? WebpWriter.DEFAULT.withLossless()
+                : WebpWriter.DEFAULT;
+
+        image.output(writer, outputFile);
+
+        return outputFile.getAbsolutePath();
+    }
+
+
 }

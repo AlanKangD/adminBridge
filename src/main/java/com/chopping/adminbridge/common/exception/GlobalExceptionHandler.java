@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,6 +88,22 @@ public class GlobalExceptionHandler {
         response.put("timestamp", System.currentTimeMillis());
         
         return ResponseEntity.badRequest().body(response);
+    }
+
+    /**
+     * 파일 업로드 크기 초과 예외 처리
+     */
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Map<String, Object>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+        log.error("File upload size exceeded: {}", e.getMessage());
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("errorCode", "FILE_SIZE_EXCEEDED");
+
+        response.put("message", "업로드할 파일 크기가 허용된 최대 크기를 초과했습니다. (최대 50MB)");
+        response.put("timestamp", System.currentTimeMillis());
+        
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(response);
     }
 
     /**
