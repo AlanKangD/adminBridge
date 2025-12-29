@@ -76,6 +76,7 @@ public class SwaggerConfig {
                 .packagesToScan("com.chopping.adminbridge.recipe.controller")
                 .pathsToMatch("/api/recipe/**")
                 .build();
+
     }
 
     /**
